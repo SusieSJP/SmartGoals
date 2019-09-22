@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm)
     let user = this.userAccountService.login(
         this.loginForm.value.email, this.loginForm.value.password);
+
     if (user != null) {
       this.router.navigate(['/mainpage', user.userName]);
     } else {
