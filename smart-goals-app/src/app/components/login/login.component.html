@@ -1,21 +1,37 @@
 <div class = "center">
 
     <div class = "wide-margin">
-          <h1>Log In Your Account</h1>
+        <h1>Log In Your Account</h1>
+    </div>
+
+    <div>
+        <!-- the ngSubmit directive only gives us one event we can listen to -->
+        <!-- the event made available by the ngSubmit directive will be fired whenever this form is submitted -->
+        <!-- use local reference here #f -->
+        <form class="form" (ngSubmit) = "onSubmit()" #f="ngForm" class="center-input">
+          <mat-form-field class="full-width">
+            <!-- required/email here are validators -->
+              <textarea ngModel name="email"
+                        required email
+                        #email = "ngModel"
+                        matInput placeholder="Email"></textarea>
+          </mat-form-field>
+          <p class="invalid-msg" *ngIf="!email.valid && email.touched">* Please enter a valid email address</p>
+
+          <mat-form-field class="full-width">
+              <textarea ngModel name="password"
+                        required
+                        #pwd = "ngModel"
+                        matInput placeholder="Password"></textarea>
+          </mat-form-field>
+          <p class="invalid-msg" *ngIf="!pwd.valid && pwd.touched">* This is a required field</p>
+          <!-- if we put the button inside the form element, this button will submit the form,
+            will send a request normally, besides that, it will also trigger a javascript event-->
+          <p *ngIf="loginStatus === false" class="invalid-msg">Sorry, Invalid email address or password, please try again :(</p>
+          <button class = "wide-margin" mat-raised-button color="primary"
+                  [disabled]="!f.valid">Log In</button>
+        </form>
       </div>
-      <div class = "center">
-          <form class="form">
-              <mat-form-field class="full-width">
-                  <textarea matInput placeholder="Email/User Name"></textarea>
-              </mat-form-field>
 
-              <mat-form-field class="full-width">
-                  <textarea matInput placeholder="Password"></textarea>
-              </mat-form-field>
-          </form>
-      </div>
-
-
-        <button class = "wide-margin" mat-raised-button color="primary">Log In</button>
   </div>
 

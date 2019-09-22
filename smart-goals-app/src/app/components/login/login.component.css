@@ -7,22 +7,30 @@
   .wide-margin {
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left:auto;
-    margin-right:auto;
   }
 
   h1 {
     font-family: 'Lalezar', cursive;
-    /* font-family: 'Source Sans Pro', sans-serif; */
     font-size: 3em;
   }
-
-
 
   .form {
     width: 100%;
   }
 
+  .center-input {
+    width: 50%;
+    margin:auto;
+  }
+
   .full-width {
     width: 100%;
+  }
+
+  .invalid-msg {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align:left;
+    font-size: 0.8em;
+    font-style: italic;
+    color: red;
   }

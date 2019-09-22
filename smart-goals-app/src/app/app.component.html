@@ -1,15 +1,19 @@
-<mat-toolbar color="primary" style = "margin-bottom: 100px">
-  <mat-toolbar-row>
-    <button role= "link" routerLink = "/" mat-button>Home</button>
-    <span class = "spacer-left-right"></span>
-    <button role= "link" routerLink = "/login" mat-button>Log In</button>
-    <button role= "link" routerLink = "/signin" mat-flat-button>Sign In</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+<!-- navbars -->
+<div *ngIf="!(path.startsWith('/mainpage'))">
+    <mat-toolbar color="primary" style = "margin-bottom: 100px">
+        <mat-toolbar-row>
+          <button role= "link" routerLink = "/" mat-button>Home</button>
+          <span class = "spacer-left-right"></span>
+          <button role= "link" routerLink = "/login" mat-button>Log In</button>
+          <button role= "link" routerLink = "/signup" mat-flat-button>Sign Up</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</div>
+
 
 <router-outlet></router-outlet>
 
-
+<!-- footer -->
 <mat-toolbar color="primary" style = "margin-top: 100px">
     <mat-toolbar-row style = "justify-content: center">
       <span><button role= "link" mat-button> Leave Your Comments </button></span>

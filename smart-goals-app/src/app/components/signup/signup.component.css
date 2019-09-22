@@ -26,3 +26,15 @@ h1 {
 .full-width {
   width: 100%;
 }
+
+/* textarea .ng-invalid .ng-touched {
+  border: 1px solid red;
+} */
+
+.invalid-msg {
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align:left;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+}
