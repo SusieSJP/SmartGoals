@@ -1,0 +1,48 @@
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Sans Pro', sans-serif;
+  width: 60%;
+  margin: 5% auto;
+}
+
+h1 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  margin-top: 25%;
+}
+
+h2 {
+  font-family: 'Lalezar', cursive;
+  font-size: 100px;
+  margin-bottom:0;
+  margin-top:0;
+  color: #512da8;
+}
+
+span {
+  color: #ffb300;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.goal-summary {
+  display: flex;
+  align-items: center;
+
+}
+
+.statics{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 10%;
+  width: 250px;
+  font-family: 'Source Sans Pro', sans-serif;
+}

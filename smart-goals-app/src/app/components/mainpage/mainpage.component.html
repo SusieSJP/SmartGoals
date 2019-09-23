@@ -1,23 +1,20 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav class="example-sidenav" #sidenav mode>
-    <div>
-        <img src="assets/images/WechatIMG872.jpeg" alt="profile-pic" width = "180" height = "140" class="profile-pict">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" #sidenav mode="side" opened>
+    <div class="center">
+        <img src="assets/images/WechatIMG872.jpeg" alt="profile-pic" width = "180" height = "180" class="profile-pict">
+        <h2>{{ user.userName }}</h2>
     </div>
-    <div class="menu">
-        <ul class="center"><button mat-button color="primary">New Goals</button></ul>
-        <ul class="center"><button mat-button color="primary">Daily Checkbox</button></ul>
-        <ul class="center"><button mat-button color="primary">Personal Progress</button></ul>
-        <ul class="center"><button mat-button color="primary">Groups</button></ul>
-        <ul class="center"><button mat-button color="primary">Profile</button></ul>
+    <div class="center">
+        <div class="menulist" routerLinkActive="router-link-active"><a [routerLink]="['new-goal']">New Goals</a></div>
+        <div class="menulist" routerLinkActive="router-link-active"><a [routerLink]="['goal-check']">Daily Checkbox</a></div>
+        <div class="menulist" routerLinkActive="router-link-active"><a [routerLink]="['personal-progress']">Personal Progress</a></div>
+        <div class="menulist" routerLinkActive="router-link-active"><a [routerLink]="['groups']">Groups</a></div>
+        <div class="menulist" routerLinkActive="router-link-active"><a [routerLink]="['profile']">Edit Profile</a></div>
     </div>
   </mat-sidenav>
 
-  <mat-sidenav-content>
-      <mat-toolbar color="primary" style = "margin-bottom: 100px">
-          <mat-toolbar-row class="right-side">
-            <button mat-button (click)="sidenav.toggle()"> {{ user.userName }} </button>
-          </mat-toolbar-row>
-      </mat-toolbar>
+  <mat-sidenav-content class="content">
+      <router-outlet></router-outlet>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

@@ -1,11 +1,5 @@
-.example-sidenav {
-  width: 200px;
-  background:white;
-  color:black;
-  font-family: 'Source Sans Pro', sans-serif;
-}
 
-.example-container {
+.sidenav-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,23 +7,54 @@
   right: 0;
 }
 
-.right-side {
-  justify-content: flex-end;
+.sidenav {
+  width: 250px;
+  background:#757575;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .center {
   text-align: center;
   padding-inline-start: 0;
+  margin-bottom: 200px;
   }
 
-.menu {
-  margin-top: 160px;
-}
 
 .profile-pict {
   display: block;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 50px;
   border-radius: 50%;
 }
+
+.content {
+  background:#e0e0e0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.menulist {
+  padding-top: 6%;
+  padding-bottom: 6%;
+  font-size: 1.15rem;
+}
+
+.menulist:hover {
+  background: #616161;
+}
+
+.router-link-active {
+  background: #512da8;
+}
+
+h2 {
+  color: #512da8;
+}
+
+
+

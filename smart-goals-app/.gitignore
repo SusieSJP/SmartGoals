@@ -1,4 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+<<<<<<< HEAD
+=======
+# env files
+environments/*
+environment.ts
+>>>>>>> 10d9fb441807396fe845d60b4979f0a7e130f03e
 
 # compiled output
 /dist
