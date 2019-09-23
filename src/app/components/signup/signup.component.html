@@ -1,0 +1,36 @@
+<div class = "center">
+
+    <div class = "wide-margin">
+        <h1>Create a SmartGoals Account</h1>
+    </div>
+
+    <div class = "center">
+        <form class="form" #f="ngForm">
+            <mat-form-field class="full-width">
+                <textarea required email
+                          ngModel name="email"
+                          #email = "ngModel"
+                          matInput placeholder="Email"></textarea>
+            </mat-form-field>
+            <p *ngIf="!email.valid && email.touched" class="invalid-msg">*Please enter valid email address</p>
+
+            <mat-form-field class="full-width">
+              <textarea required
+                        ngModel name="userName"
+                        matInput placeholder="User Name"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <textarea required
+                          ngModel name="password"
+                          matInput placeholder="Password"></textarea>
+            </mat-form-field>
+
+            <button class = "wide-margin" mat-raised-button color="primary"
+                    [disabled]="f.invalid"
+                    (click)="onCreateAccount(f)">Submit</button>
+        </form>
+    </div>
+
+</div>
+
