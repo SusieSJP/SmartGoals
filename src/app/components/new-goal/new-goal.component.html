@@ -1,0 +1,44 @@
+<div class="center">
+    <div>
+        <h1>Set Up Your New Goal</h1>
+    </div>
+
+    <div class="example-container">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name Tag</mat-label>
+            <input matInput placeholder="Placeholder">
+            <mat-hint>*Short and clear tag would be great, such as SQL, Python, Web, CFA, CPA, Final...</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Toal Workload</mat-label>
+            <input matInput placeholder="Placeholder">
+            <mat-hint>*Quantify your goal into numbers, such as 7 (chapters), 100 (questions), 12 (sections)...  </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker1" placeholder="Choose a date to start">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker2" placeholder="Choose a date to end">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+    </div>
+
+    <button mat-flat-button color="primary">Add New Goal</button>
+</div>
+
+
+
+
+
+
+
