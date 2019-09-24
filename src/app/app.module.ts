@@ -1,4 +1,8 @@
 import {NgModule} from '@angular/core';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/';
 import {MatButtonModule} from '@angular/material/button';
@@ -10,6 +14,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {environment} from '../environments/environment';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -42,6 +48,10 @@ import {UserAccountService} from './services/user-account.service';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,

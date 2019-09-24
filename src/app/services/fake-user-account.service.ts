@@ -13,12 +13,12 @@ export class FakeUserAccountService extends UserAccountService {
   }
 
   signUp(email: string, uName: string, pwd: string) {
-    this.accounts.set(email, {email: email, userName: uName});
+    this.accounts.set(email, {email, userName: uName});
     this.emailPwds.set(email, pwd);
   }
 
   login(email: string, pwd: string) {
-    if (pwd != this.emailPwds.get(email)) {
+    if (pwd !== this.emailPwds.get(email)) {
       return null;
     }
     this.loggedinUser = this.accounts.get(email);
