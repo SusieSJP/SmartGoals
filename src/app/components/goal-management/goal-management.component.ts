@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-goal-management',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./goal-management.component.css']
 })
 export class GoalManagementComponent implements OnInit {
+  date = new FormControl(new Date());
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

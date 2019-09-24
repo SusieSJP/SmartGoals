@@ -1,1 +1,12 @@
-<p>goal-management works!</p>
+<div class="center">
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" [formControl]="date"
+           placeholder="choose a date to edit progress">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div>
+
+  </div>
+</div>
