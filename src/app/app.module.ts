@@ -4,7 +4,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material/';
+import {MatNativeDateModule, MatTabsModule} from '@angular/material/';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -29,6 +29,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
 import {AngularFireUserAccountService} from './services/af-user-account.service';
+import {FakeGoalManagementService} from './services/fake-goal-management-service';
 import {FakeUserAccountService} from './services/fake-user-account.service';
 import {UserAccountService} from './services/user-account.service';
 
@@ -65,12 +66,15 @@ import {UserAccountService} from './services/user-account.service';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
+    MatCardModule,
 
   ],
   providers: [
     AngularFireUserAccountService,
     FakeUserAccountService,
     {provide: UserAccountService, useClass: AngularFireUserAccountService},
+    FakeGoalManagementService,
   ],
   bootstrap: [AppComponent]
 })

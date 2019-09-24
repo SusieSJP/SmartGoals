@@ -1,10 +1,23 @@
-<div class="center">
+<div class="start-column">
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [formControl]="date"
-           placeholder="choose a date to edit progress">
+           placeholder="Choose a date to edit progress">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+  <mat-tab-group class = "full-screen">
+    <mat-tab label="Active Goals">
+      <mat-card *ngFor = "let goal of goalSet">
+        {{ goal.name }}
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Completed Goals">
+      <p>completed</p>
+    </mat-tab>
+  </mat-tab-group>
+
+
 
   <div>
 

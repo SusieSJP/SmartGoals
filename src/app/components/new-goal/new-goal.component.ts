@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDatepickerInputEvent} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
+import {FakeGoalManagementService} from 'src/app/services/fake-goal-management-service';
 
 @Component({
   selector: 'app-new-goal',
@@ -8,17 +10,19 @@ import {MatDatepickerInputEvent} from '@angular/material';
 })
 export class NewGoalComponent implements OnInit {
   goalName: string;
+  goalWorkload: number;
   goalStartDate: Date;
   goalEndDate: Date;
-  goalWorkload: number;
   diffDays: number = 0;
   avgWorkload: number = 0.0;
 
-  constructor() {}
+  constructor(
+      private goalManagementService: FakeGoalManagementService,
+      private route: ActivatedRoute) {}
 
   ngOnInit() {}
 
-  onCreateGoalName(event: Event) {
+  onGoalName(event: Event) {
     this.goalName = (<HTMLInputElement>event.target).value;
   }
   onGoalWorkload(event: Event) {
@@ -35,5 +39,15 @@ export class NewGoalComponent implements OnInit {
           (1000 * 3600 * 24);
       this.avgWorkload = this.goalWorkload / this.diffDays;
     }
+  }
+
+  onCreateGoal() {
+    this.goalManagementService.setGoal(
+        this.goalName, this.goalStartDate, this.goalEndDate, this.goalWorkload,
+        this.avgWorkload);
+
+    let goalKey = this.goalName + this.route.params['username'];
+    let newGoal = this.goalManagementService.getGoal(goalKey);
+    this.goalManagementService.addGoal(newGoal, this.route.params['username']);
   }
 }

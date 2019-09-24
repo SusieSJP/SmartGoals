@@ -8,7 +8,7 @@
 }
 
 .sidenav {
-  width: 250px;
+  width: 20%;
   background:#757575;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -16,16 +16,16 @@
 .center {
   text-align: center;
   padding-inline-start: 0;
-  margin-bottom: 200px;
+  margin-bottom: 40%;
   }
 
 
 .profile-pict {
   display: block;
-  margin-top: 100px;
+  margin-top: 15%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 50px;
+  margin-bottom: 5%;
   border-radius: 50%;
 }
 
@@ -39,9 +39,10 @@ a {
 }
 
 .menulist {
-  padding-top: 6%;
-  padding-bottom: 6%;
-  font-size: 1.15rem;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  font-size: 1.1rem;
+  padding-inline-start: 0;
 }
 
 .menulist:hover {

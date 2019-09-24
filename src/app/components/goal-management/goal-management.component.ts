@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Goal} from 'src/app/model/goal';
+import {FakeGoalManagementService} from 'src/app/services/fake-goal-management-service';
 
 @Component({
   selector: 'app-goal-management',
@@ -8,8 +11,16 @@ import {FormControl} from '@angular/forms';
 })
 export class GoalManagementComponent implements OnInit {
   date = new FormControl(new Date());
+  goalSet: Goal[];
+  userName: string;
 
-  constructor() {}
+  constructor(
+      private goalManagementService: FakeGoalManagementService,
+      private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userName = this.route.params['username'];
+    this.goalSet = this.goalManagementService.getGoals(this.userName);
+    console.log(this.goalSet)
+  }
 }
