@@ -13,7 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {GoalCheckComponent} from './components/goal-check/goal-check.component';
+import {GoalManagementComponent} from './components/goal-management/goal-management.component';
 import {GroupsComponent} from './components/groups/groups.component';
 import {HomeComponent} from './components/home/home.component';
 import {LoginComponent} from './components/login/login.component';
@@ -37,7 +37,7 @@ import {UserAccountService} from './services/user-account.service';
     ProgressComponent,
     GroupsComponent,
     ProfileComponent,
-    GoalCheckComponent,
+    GoalManagementComponent,
 
   ],
   imports: [

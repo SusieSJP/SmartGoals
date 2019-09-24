@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {GoalCheckComponent} from './components/goal-check/goal-check.component';
+import {GoalManagementComponent} from './components/goal-management/goal-management.component';
 import {GroupsComponent} from './components/groups/groups.component';
 import {HomeComponent} from './components/home/home.component';
 import {LoginComponent} from './components/login/login.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
       {path: 'personal-progress', component: ProgressComponent},
       {path: 'groups', component: GroupsComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'goal-check', component: GoalCheckComponent}
+      {path: 'goal-management', component: GoalManagementComponent}
     ]
   },
   {path: '**', redirectTo: ''}
