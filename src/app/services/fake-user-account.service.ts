@@ -1,8 +1,21 @@
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+
 import {User} from '../model/user';
+
 import {UserAccountService} from './user-account.service';
 
+@Injectable()
 export class FakeUserAccountService extends UserAccountService {
-  loggedinUser: User;
+  activeUser = new BehaviorSubject<User|null>(null);
+  private user: User|null;
+  get loggedinUser(): User|null {
+    return this.user;
+  }
+  set loggedinUser(value: User|null) {
+    this.user = value;
+    this.activeUser.next(value);
+  }
   accounts = new Map<string, User>();
   emailPwds = new Map<string, string>();
 
@@ -13,15 +26,22 @@ export class FakeUserAccountService extends UserAccountService {
   }
 
   signUp(email: string, uName: string, pwd: string) {
-    this.accounts.set(email, {email: email, userName: uName});
+    const user = {email, userName: uName};
+    this.accounts.set(email, user);
     this.emailPwds.set(email, pwd);
+    this.loggedinUser = user;
   }
 
-  login(email: string, pwd: string) {
-    if (pwd != this.emailPwds.get(email)) {
+  loginWithEmail(email: string, pwd: string) {
+    if (pwd !== this.emailPwds.get(email)) {
       return null;
     }
     this.loggedinUser = this.accounts.get(email);
-    return this.loggedinUser;
+  }
+
+  loginWithGoogle() {}
+
+  logout() {
+    this.loggedinUser = null;
   }
 }
