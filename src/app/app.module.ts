@@ -28,6 +28,7 @@ import {NewGoalComponent} from './components/new-goal/new-goal.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
+import {AngularFireUserAccountService} from './services/af-user-account.service';
 import {FakeUserAccountService} from './services/fake-user-account.service';
 import {UserAccountService} from './services/user-account.service';
 
@@ -67,8 +68,9 @@ import {UserAccountService} from './services/user-account.service';
 
   ],
   providers: [
+    AngularFireUserAccountService,
     FakeUserAccountService,
-    {provide: UserAccountService, useClass: FakeUserAccountService},
+    {provide: UserAccountService, useClass: AngularFireUserAccountService},
   ],
   bootstrap: [AppComponent]
 })
