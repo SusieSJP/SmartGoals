@@ -23,7 +23,6 @@ export class AngularFireUserAccountService extends UserAccountService {
     super();
   }
 
-
   loginWithEmail(email: string, pwd: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, pwd)
         .then((credential: auth.UserCredential) => {

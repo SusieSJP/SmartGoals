@@ -9,8 +9,6 @@ export class FakeGoalManagementService extends GoalManagementService {
   goals = new Map<number, Goal>();
   // Key is the user email and the value is the goal id.
   userGoals = new Map<string, number[]>();
-  // Key is the composite variable (email+goalname) and value is the goal id.
-  goalIdentifiers = new Map<string, number>();
 
   constructor() {
     super();
@@ -49,9 +47,8 @@ export class FakeGoalManagementService extends GoalManagementService {
   }
 
   // Get the detail information of a specific goal.
-  getGoal(goalKey: string): Goal {
-    const goalId = this.goalIdentifiers.get(goalKey);
-    return this.goals.get(goalId);
+  getGoal(id: number): Goal {
+    return this.goals.get(id);
   }
 
   // Get all the goals of the user.
