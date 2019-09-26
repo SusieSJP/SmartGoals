@@ -5,6 +5,7 @@
   margin-top: 5%;
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 5%;
 }
 
 .mat-form-field {
@@ -15,12 +16,61 @@
   width: 300px;
 }
 
-.full-screen {
+.full-screen-bg {
   width: 100%;
+  border-color: #9e9e9e;
+  border-style: solid;
+  padding: 4%;
+  border-radius: 15px;
+  margin-top: 8%;
 }
 
-mat-tab {
-  background-color: purple;
-  color: yellow;
+.goal-card {
+  padding:1% 3%;
+  height: 20px;
+  margin: 2% auto;
+  width: 92%;
+  background-color:#ffe082;
+  color: #616161;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:0.9rem;
 }
 
+.emphsis {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.input-box {
+  width: 30px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1.25rem;
+}
+
+.end-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 5%;
+}
+
+.full-button {
+  background: #ff8f00;
+  margin-right: 10px;
+  color:white;
+}
+
+.empty-button {
+  border-style: solid;
+  border-color: #ff8f00;
+  margin-right: 10px;
+  color: #616161;
+}

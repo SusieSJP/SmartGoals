@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDatepickerInputEvent} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
-import {FakeGoalManagementService} from 'src/app/services/fake-goal-management-service';
+import {GoalManagementService} from 'src/app/services/goal-management.service';
+import {UserAccountService} from 'src/app/services/user-account.service';
 
 @Component({
   selector: 'app-new-goal',
@@ -10,15 +10,18 @@ import {FakeGoalManagementService} from 'src/app/services/fake-goal-management-s
 })
 export class NewGoalComponent implements OnInit {
   goalName: string;
+  // goal workload is the total number of works before complete the goal
   goalWorkload: number;
   goalStartDate: Date;
   goalEndDate: Date;
+  // diffDays is the total length of the working period
   diffDays: number = 0;
+  // avgWorkload is the expected daily workload
   avgWorkload: number = 0.0;
 
   constructor(
-      private goalManagementService: FakeGoalManagementService,
-      private route: ActivatedRoute) {}
+      private goalManagementService: GoalManagementService,
+      private userAccountService: UserAccountService) {}
 
   ngOnInit() {}
 
@@ -42,12 +45,8 @@ export class NewGoalComponent implements OnInit {
   }
 
   onCreateGoal() {
-    this.goalManagementService.setGoal(
+    this.goalManagementService.addGoal(
         this.goalName, this.goalStartDate, this.goalEndDate, this.goalWorkload,
-        this.avgWorkload);
-
-    let goalKey = this.goalName + this.route.params['username'];
-    let newGoal = this.goalManagementService.getGoal(goalKey);
-    this.goalManagementService.addGoal(newGoal, this.route.params['username']);
+        this.avgWorkload, this.userAccountService.loggedinUser.email);
   }
 }

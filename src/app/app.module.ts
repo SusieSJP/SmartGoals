@@ -31,6 +31,7 @@ import {SignupComponent} from './components/signup/signup.component';
 import {AngularFireUserAccountService} from './services/af-user-account.service';
 import {FakeGoalManagementService} from './services/fake-goal-management-service';
 import {FakeUserAccountService} from './services/fake-user-account.service';
+import {GoalManagementService} from './services/goal-management.service';
 import {UserAccountService} from './services/user-account.service';
 
 
@@ -75,6 +76,7 @@ import {UserAccountService} from './services/user-account.service';
     FakeUserAccountService,
     {provide: UserAccountService, useClass: AngularFireUserAccountService},
     FakeGoalManagementService,
+    {provide: GoalManagementService, useClass: FakeGoalManagementService},
   ],
   bootstrap: [AppComponent]
 })

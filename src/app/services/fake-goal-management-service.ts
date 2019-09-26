@@ -1,20 +1,29 @@
+import {Injectable} from '@angular/core';
 import {Goal} from '../model/goal';
+import {GoalManagementService} from './goal-management.service';
 
-export class FakeGoalManagementService {
+@Injectable()
+export class FakeGoalManagementService extends GoalManagementService {
   goal: Goal;
-  goals = new Map<string, Goal>();
-  userGoals = new Map<string, Goal[]>();
+  // Key is the goal-id and the value is the specific info of each goal.
+  goals = new Map<number, Goal>();
+  // Key is the user email and the value is the goal id.
+  userGoals = new Map<string, number[]>();
+  // Key is the composite variable (email+goalname) and value is the goal id.
+  goalIdentifiers = new Map<string, number>();
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
-  setGoal(
+  addGoal(
       name: string, startDate: Date, endDate: Date, workload: number,
-      avgWorkload: number) {
-    let id = this.goals.size;
+      avgWorkload: number, userEmail: string) {
+    const id = this.goals.size;
     let diffDays =
         (endDate.valueOf() - startDate.valueOf()) / (1000 * 3600 * 24);
-    let dailyProgress = new Array<number>(diffDays);
-    let groups = new Array<number>();
+    let dailyProgress = Array.from({length: diffDays}).fill(0);
+    let groups: number[] = [];
 
     this.goal = {
       id,
@@ -24,31 +33,37 @@ export class FakeGoalManagementService {
       workload,
       avgWorkload,
       dailyProgress,
-      groups
+      groups,
+      userEmail
     };
-  }
 
-  addGoal(goal: Goal, userName: string) {
-    let goalKey = userName + goal.name;
-    this.goals.set(goalKey, goal);
-
-    // if user has at least one goal
-    if (this.userGoals.has(userName)) {
-      this.userGoals.get(userName).push(goal);
+    this.goals.set(id, this.goal);
+    // If user has at least one goal
+    if (this.userGoals.has(userEmail)) {
+      this.userGoals.get(userEmail).push(this.goal.id);
     } else {
-      let goalArr = new Array<Goal>();
-      goalArr.push(goal);
-      this.userGoals.set(userName, goalArr);
+      let goalArr: number[] = [];
+      goalArr.push(this.goal.id);
+      this.userGoals.set(userEmail, goalArr);
     }
   }
 
-  // get the detail information of a specific goal
-  // goalKey is the combination of goal.name and userName
+  // Get the detail information of a specific goal.
   getGoal(goalKey: string): Goal {
-    return this.goals.get(goalKey);
+    const goalId = this.goalIdentifiers.get(goalKey);
+    return this.goals.get(goalId);
   }
-  // get all the goals of the user
-  getGoals(userName: string): Goal[] {
-    return this.userGoals.get(userName);
+
+  // Get all the goals of the user.
+  getGoals(userEmail: string): number[] {
+    return this.userGoals.get(userEmail);
+  }
+
+  updateProgress(id: number, date: Date, progress: number): void {
+    const editGoal = this.goals.get(id);
+    let index =
+        (date.valueOf() - editGoal.startDate.valueOf()) / (1000 * 3600 * 24);
+
+    editGoal.dailyProgress[index] = progress;
   }
 }

@@ -47,3 +47,8 @@ span {
   font-family: 'Source Sans Pro', sans-serif;
   margin-right: 5%;
 }
+
+.full-button {
+  background: #ffb300;
+  color: white;
+}
