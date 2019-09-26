@@ -13,14 +13,14 @@
             <span>#{{ goal.name }}</span>
             <span>
                 <span>Actual</span>
-                <input type="text" class="input-box" (input)="onUpdateProgress(goal.id,$event)">
+                <input type="text" class="input-box" (input)="onTempEditProgress(goal.id,$event)">
                 <span>/ Expected</span>
                 <span class="emphsis">{{ goal.avgWorkload }}</span>
             </span>
         </div>
       </div>
       <div class="end-row">
-          <button mat-flat-button class="empty-button">Submit New Progress</button>
+          <button (click)="onUpdateProgress()" mat-flat-button class="empty-button">Save New Progress</button>
           <button mat-flat-button class="full-button">View Detailed Progress</button>
       </div>
     </mat-tab>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="end-row">
-            <button (click)="onAddProgress()" mat-flat-button class="full-button">View Detailed Progress</button>
+            <button mat-flat-button class="full-button">View Detailed Progress</button>
         </div>
     </mat-tab>
   </mat-tab-group>
