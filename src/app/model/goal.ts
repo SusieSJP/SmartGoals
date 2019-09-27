@@ -11,7 +11,7 @@ export interface Goal {
   // daily progress is the list of number, where each number represents the
   // actual progress of the user the length of the list should be the same as
   // the duration of the goal
-  dailyProgress: Map<Date, number>;
+  dailyProgress: number[];
   // groups is the list of number, where each number represents the group id
   // that contains this goal.
   groups: number[];

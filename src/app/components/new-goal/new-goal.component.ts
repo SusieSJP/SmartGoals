@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDatepickerInputEvent} from '@angular/material';
-import {GoalManagementService} from 'src/app/services/goal-management.service';
+import {AngularFireGoalManagementService} from 'src/app/services/af-goal-management.service';
 import {UserAccountService} from 'src/app/services/user-account.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class NewGoalComponent implements OnInit {
   avgWorkload: number = 0.0;
 
   constructor(
-      private goalManagementService: GoalManagementService,
+      private afGoalService: AngularFireGoalManagementService,
       private userAccountService: UserAccountService) {}
 
   ngOnInit() {}
@@ -37,15 +37,15 @@ export class NewGoalComponent implements OnInit {
   onEndDate(event: MatDatepickerInputEvent<Date>) {
     this.goalEndDate = event.value;
     if (this.goalStartDate && this.goalStartDate < this.goalEndDate) {
-      this.diffDays =
+      this.diffDays = Math.floor(
           (this.goalEndDate.valueOf() - this.goalStartDate.valueOf()) /
-          (1000 * 3600 * 24);
+          (1000 * 3600 * 24));
       this.avgWorkload = this.goalWorkload / this.diffDays;
     }
   }
 
   onCreateGoal() {
-    this.goalManagementService.addGoal(
+    this.afGoalService.addGoal(
         this.goalName, this.goalStartDate, this.goalEndDate, this.goalWorkload,
         this.avgWorkload, this.userAccountService.loggedinUser.email);
   }

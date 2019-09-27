@@ -9,13 +9,13 @@
   <mat-tab-group class = "full-screen-bg">
     <mat-tab label="Active Goals" class="start-column">
       <div *ngFor = "let goal of goalArr">
-        <div *ngIf = "goal.endDate.getTime() >= date.value.getTime()" class="goal-card">
+        <div *ngIf = "goal.endDate.toDate().getTime() >= date.value.getTime()" class="goal-card">
             <span>#{{ goal.name }}</span>
             <span>
                 <span>Actual</span>
                 <input type="text" class="input-box" (input)="onTempEditProgress(goal.id,$event)">
                 <span>/ Expected</span>
-                <span class="emphsis">{{ goal.avgWorkload }}</span>
+                <span class="emphsis">{{ goal.avgWorkload | number:'1.1-1'}}</span>
             </span>
         </div>
       </div>
@@ -27,12 +27,12 @@
 
     <mat-tab label="Completed Goals">
         <div *ngFor = "let goal of goalArr">
-          <div *ngIf = "date.value.getTime() > goal.endDate.getTime()" class="goal-card">
+          <div *ngIf = "date.value.getTime() > goal.endDate.toDate().getTime()" class="goal-card">
               <span>#{{ goal.name }}</span>
               <span>
                   <span>OverAll Progress</span>
                   <span class="emphsis"> %</span>
-                  <span>by {{goal.endDate.toLocaleDateString()}}</span>
+                  <span>by {{goal.endDate.toDate().toLocaleDateString()}}</span>
               </span>
           </div>
         </div>
