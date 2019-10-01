@@ -24,6 +24,11 @@ export class AngularFireUserAccountService extends UserAccountService {
     super();
   }
 
+  // this.afAuth.auth.setPersistence(this.afAuth.auth.Auth.Persistence.LOCAL).then(fucntion(){
+  //   return
+
+  // }))
+
   loginWithEmail(email: string, pwd: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, pwd)
         .then((credential: auth.UserCredential) => {
@@ -51,6 +56,7 @@ export class AngularFireUserAccountService extends UserAccountService {
           console.log(e.message);
         });
   }
+
 
   logout() {
     this.afAuth.auth.signOut();

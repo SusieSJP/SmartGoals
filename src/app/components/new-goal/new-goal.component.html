@@ -1,23 +1,22 @@
-<div class="center-column">
+<div class="center-column-bg">
     <div>
         <h1>Set Up Your <span>New</span> Goal</h1>
     </div>
 
     <div class="center-row">
         <form class="center-column">
-          <div class="example-container">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="input-list">
                 <mat-label>Name Tag</mat-label>
                 <input matInput placeholder="Placeholder" (input)="onGoalName($event)">
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="input-list">
                 <mat-label>Toal Workload</mat-label>
                 <input matInput placeholder="Placeholder" (input)="onGoalWorkload($event)">
                 <mat-hint>*Quantify goals as numbers such as 7 (chapters), 100 (questions)...  </mat-hint>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="input-list">
                 <mat-label>Start Date</mat-label>
                 <input matInput [matDatepicker]="picker1" placeholder="Choose a date to start"
                        (dateInput)="onStartDate($event)">
@@ -25,17 +24,16 @@
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="input-list">
                 <mat-label>Due Date</mat-label>
                 <input matInput [matDatepicker]="picker2" placeholder="Choose a date to end"
                 (dateInput)="onEndDate($event)">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-        </div>
       </form>
 
-      <div class="center-row">
+      <div class="center-column">
             <div class="statics">
                 <div><h2>{{ diffDays }}</h2></div>
                 <div><p>Total Days</p></div>

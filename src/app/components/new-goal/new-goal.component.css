@@ -1,12 +1,4 @@
 
-.example-container {
-  display: flex;
-  flex-direction: column;
-  font-family: 'Source Sans Pro', sans-serif;
-  margin: 5% auto;
-  width: 400px;
-}
-
 h1 {
   font-family: 'Lalezar', cursive;
   font-size: 3em;
@@ -25,16 +17,27 @@ span {
   color: #ffb300;
 }
 
+.center-column-bg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .center-column {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
 }
 .center-row {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+.input-list {
+  width: 180%;
 }
 
 .statics{
@@ -43,9 +46,8 @@ span {
   text-align: center;
   flex-direction: column;
   padding-bottom: 5%;
-  width: 200px;
+  padding-left: 50%;
   font-family: 'Source Sans Pro', sans-serif;
-  margin-right: 5%;
 }
 
 .full-button {

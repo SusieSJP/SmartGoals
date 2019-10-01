@@ -26,7 +26,12 @@ export class GoalManagementComponent implements OnInit {
       private userAccountService: UserAccountService) {}
 
   ngOnInit() {
-    this.userEmail = this.userAccountService.loggedinUser.email;
+    if (this.userAccountService.loggedinUser != null) {
+      this.userEmail = this.userAccountService.loggedinUser.email;
+    } else {
+      this.userEmail = 'test';
+    }
+
     this.afGoalService.getGoals(this.userEmail)
         .subscribe(goals => {this.goalArr = goals});
   }

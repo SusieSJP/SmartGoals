@@ -1,0 +1,27 @@
+.center-column-bg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  margin-top: 8%;
+}
+
+span {
+  color: #ffb300;
+}
+
+.panel {
+  width: 80%;
+  margin-left: 10%;
+  margin-right:10%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  width: inherit;
+}

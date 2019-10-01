@@ -4,7 +4,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule, MatTabsModule} from '@angular/material/';
+import {MatExpansionModule, MatNativeDateModule, MatTabsModule} from '@angular/material/';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -32,6 +32,8 @@ import {AngularFireGoalManagementService} from './services/af-goal-management.se
 import {AngularFireUserAccountService} from './services/af-user-account.service';
 import {GoalManagementService} from './services/goal-management.service';
 import {UserAccountService} from './services/user-account.service';
+import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
+import { BarchartComponent } from './components/barchart/barchart.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import {UserAccountService} from './services/user-account.service';
     GroupsComponent,
     ProfileComponent,
     GoalManagementComponent,
+    CalendarViewComponent,
+    BarchartComponent,
 
   ],
   imports: [
@@ -68,6 +72,7 @@ import {UserAccountService} from './services/user-account.service';
     MatNativeDateModule,
     MatTabsModule,
     MatCardModule,
+    MatExpansionModule,
 
   ],
   providers: [

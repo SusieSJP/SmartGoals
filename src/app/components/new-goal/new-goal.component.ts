@@ -33,6 +33,7 @@ export class NewGoalComponent implements OnInit {
   }
   onStartDate(event: MatDatepickerInputEvent<Date>) {
     this.goalStartDate = event.value;
+    console.log(typeof (this.goalStartDate))
   }
   onEndDate(event: MatDatepickerInputEvent<Date>) {
     this.goalEndDate = event.value;

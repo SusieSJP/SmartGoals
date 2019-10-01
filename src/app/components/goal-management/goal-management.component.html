@@ -1,4 +1,8 @@
-<div class="start-column">
+<div class="center-column-bg">
+  <div>
+    <h1>Daily Check Your <span>New</span> Progress</h1>
+  </div>
+
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [formControl]="date"
            placeholder="Choose a date to edit progress">
@@ -9,7 +13,7 @@
   <mat-tab-group class = "full-screen-bg">
     <mat-tab label="Active Goals" class="start-column">
       <div *ngFor = "let goal of goalArr">
-        <div *ngIf = "goal.endDate.toDate().getTime() >= date.value.getTime()" class="goal-card">
+        <div *ngIf = "goal.endDate.getTime() >= date.value.getTime()" class="goal-card">
             <span>#{{ goal.name }}</span>
             <span>
                 <span>Actual</span>
@@ -27,12 +31,12 @@
 
     <mat-tab label="Completed Goals">
         <div *ngFor = "let goal of goalArr">
-          <div *ngIf = "date.value.getTime() > goal.endDate.toDate().getTime()" class="goal-card">
+          <div *ngIf = "date.value.getTime() > goal.endDate.getTime()" class="goal-card">
               <span>#{{ goal.name }}</span>
               <span>
                   <span>OverAll Progress</span>
                   <span class="emphsis"> %</span>
-                  <span>by {{goal.endDate.toDate().toLocaleDateString()}}</span>
+                  <span>by {{goal.endDate.toLocaleDateString()}}</span>
               </span>
           </div>
         </div>

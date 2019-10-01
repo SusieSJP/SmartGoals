@@ -1,1 +1,36 @@
-<p>progress works!</p>
+<div class="center-column-bg">
+    <div>
+      <h1>My<span> Smart</span> Goals and Progress</h1>
+    </div>
+
+    <div *ngFor="let goal of goalArr" class="panel">
+    <mat-accordion >
+        <mat-expansion-panel>
+              <mat-expansion-panel-header class = "panel-header">
+                  <mat-panel-title>
+                    <p>#{{ goal.name }}</p>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <p> overall progress </p>
+                    <!-- Math.round(((goal.dailyProgress).reduce((a,b) => a+b, 0)/goal.workload) * 10)/10 -->
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>Start Date: {{ goal.startDate.toLocaleDateString()}}</p>
+                <p>Due Date: {{ goal.endDate.toLocaleDateString()}}</p>
+                <div class="charts">
+                  <div>
+                    <app-barchart [data] = "goal"></app-barchart>
+                  </div>
+
+                </div>
+
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+
+  </div>
+  <!-- <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="charts.js"></script> -->
+

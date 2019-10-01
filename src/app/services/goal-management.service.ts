@@ -5,6 +5,9 @@ import {Goal} from '../model/goal';
 
 @Injectable()
 export abstract class GoalManagementService {
+  activeGoals: Observable<Goal[]|null>;
+  currGoals: Goal[];
+
   abstract addGoal(
       name: string, startDate: Date, endDate: Date, workload: number,
       avgWorkload: number, userEmail: string): void;

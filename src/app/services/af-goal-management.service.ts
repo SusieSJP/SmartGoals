@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {Goal} from '../model/goal';
 
@@ -9,8 +9,60 @@ import {GoalManagementService} from './goal-management.service';
 
 @Injectable()
 export class AngularFireGoalManagementService extends GoalManagementService {
+  activeGoals = new BehaviorSubject<Goal[]|null>(null);
+  private goals: Goal[]|null;
+
+  get currGoals(): Goal[]|null {
+    return this.goals;
+  }
+  set currGoals(value: Goal[]|null) {
+    this.goals = value;
+    this.activeGoals.next(value);
+  }
+
   constructor(public afDatabase: AngularFirestore) {
     super();
+  }
+
+  getGoals(email: string): Observable<Goal[]> {
+    return this.afDatabase
+        .collection<any>(
+            'goals',
+            ref => ref.orderBy('startDate').where('userEmail', '==', email))
+        .snapshotChanges()
+        .pipe(map(actions => {
+          this.currGoals = actions.map(snap => <Goal>{
+            id: snap.payload.doc.id,
+            name: snap.payload.doc.data().name,
+            startDate: snap.payload.doc.data().startDate.toDate(),
+            endDate: snap.payload.doc.data().endDate.toDate(),
+            workload: snap.payload.doc.data().workload,
+            avgWorkload: snap.payload.doc.data().avgWorkload,
+            dailyProgress: snap.payload.doc.data().dailyProgress,
+            groups: snap.payload.doc.data().groups,
+            userEmail: snap.payload.doc.data().userEmail,
+          });
+          return this.currGoals;
+        }));
+
+    // .snapshotChanges()
+    // .pipe(map(actions => {
+    //   let snap = actions[0];
+    //   this.currGoals =  {
+    //     const goal = <Goal>{
+    //       id: snap.payload.doc.id,
+    //       name: snap.payload.doc.data().name,
+    //       startDate: snap.payload.doc.data().startDate.toDate(),
+    //       endDate: snap.payload.doc.data().endDate.toDate(),
+    //       workload: snap.payload.doc.data().workload,
+    //       avgWorkload: snap.payload.doc.data().avgWorkload,
+    //       dailyProgress: snap.payload.doc.data().dailyProgress,
+    //       groups: snap.payload.doc.data().groups,
+    //       userEmail: snap.payload.doc.data().userEmail,
+    //     };
+    //   });
+    //   return this.currGoals;
+    // }));
   }
 
   addGoal(
@@ -40,24 +92,6 @@ export class AngularFireGoalManagementService extends GoalManagementService {
             id: snap.payload.id, ...snap.payload.data()
           }
         }))
-  }
-
-  getGoals(email: string) {
-    return this.afDatabase
-        .collection(
-            'goals',
-            ref => ref.orderBy('startDate').where('userEmail', '==', email))
-        .snapshotChanges()
-        .pipe(
-            map(snaps => {return snaps.map(snap => {
-                  return <Goal>{
-                    id: snap.payload.doc.id,
-                    ...snap.payload.doc.data()
-                  };
-                })}),
-            // adding first operator here to prevent the realtime change
-            // without enduser interaction
-            first());
   }
 
   updateProgress(newProgress:

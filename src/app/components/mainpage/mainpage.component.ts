@@ -5,10 +5,11 @@ import {UserAccountService} from 'src/app/services/user-account.service';
 @Component({
   selector: 'app-mainpage',
   templateUrl: './mainpage.component.html',
-  styleUrls: ['./mainpage.component.css']
+  styleUrls: ['./mainpage.component.scss']
 })
 export class MainpageComponent implements OnInit {
   user: User;
+  isMainpage: boolean = true;
 
   constructor(private userAccountService: UserAccountService) {}
 
