@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {auth} from 'firebase/app';
 import {BehaviorSubject} from 'rxjs';
 
 import {User} from '../model/user';
-
 import {UserAccountService} from './user-account.service';
 
 @Injectable()
 export class AngularFireUserAccountService extends UserAccountService {
   activeUser = new BehaviorSubject<User|null>(null);
+
   private user: User|null;
   get loggedinUser(): User|null {
     return this.user;
@@ -19,18 +20,24 @@ export class AngularFireUserAccountService extends UserAccountService {
     this.activeUser.next(value);
   }
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth, private afDb: AngularFirestore) {
     super();
   }
 
+  // this.afAuth.auth.setPersistence(this.afAuth.auth.Auth.Persistence.LOCAL).then(fucntion(){
+  //   return
+
+  // }))
 
   loginWithEmail(email: string, pwd: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, pwd)
         .then((credential: auth.UserCredential) => {
-          this.loggedinUser = {
-            email: credential.user.email,
-            userName: 'DEFAULT NAME',
-          };
+          this.afDb.collection('users').doc(email).get().subscribe((usr) => {
+            this.loggedinUser = {
+              email: credential.user.email,
+              userName: usr.get('username')
+            };
+          });
         })
         .catch((e) => {
           console.log(e.message);
@@ -42,7 +49,7 @@ export class AngularFireUserAccountService extends UserAccountService {
         .then((credential: auth.UserCredential) => {
           this.loggedinUser = {
             email: credential.user.email,
-            userName: 'DEFAULT NAME',
+            userName: credential.user.displayName
           };
         })
         .catch((e) => {
@@ -50,16 +57,22 @@ export class AngularFireUserAccountService extends UserAccountService {
         });
   }
 
+
   logout() {
     this.afAuth.auth.signOut();
   }
 
-  // TODO: store username.
   signUp(email: string, uName: string, pwd: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, pwd)
-        .then((credential: auth.UserCredential) => {
+        .then((_) => {
+          return this.afDb.collection('users').doc(email).set({
+            email,
+            username: uName,
+          });
+        })
+        .then((_) => {
           this.loggedinUser = {
-            email: credential.user.email,
+            email: email,
             userName: uName,
           };
         })

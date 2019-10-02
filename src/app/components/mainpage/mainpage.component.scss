@@ -1,0 +1,128 @@
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav {
+  width: 20%;
+  background:#424242;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+::ng-deep {
+  .mat-drawer-inner-container {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width:inherit;
+  }
+
+  .margin-bottom {
+    height: 5%;
+  }
+
+
+.profile-pict {
+  display: block;
+  margin-top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  border-radius: 50%;
+  width: 70%;
+}
+
+.content {
+  background:#eeeeee;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.menulist {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  font-size: 1.1rem;
+  padding-inline-start: 0;
+  display: flex;
+  justify-content: center;
+  width:inherit;
+}
+
+.menulist:hover {
+  background: #616161;
+}
+
+.router-link-active {
+  background: #f9a825;
+}
+
+h2 {
+  color: #f9a825;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 4.5em;
+  padding-left: 5%;
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+}
+
+.name-text {
+  font-size:2.5em;
+  margin-block-start: 0.5em;
+}
+
+.intro-text {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 2.5rem;
+  color: #f9a825;
+}
+
+.intro {
+  margin-left: 5%;
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+  margin-top: 20%;
+}
+
+.header-bg {
+  display: flex;
+  height: 30%;
+  background-color: #512da8;
+  color: white;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.absolute-position {
+  position: absolute;
+  background:white;
+  padding-bottom: 8%;
+  width: 80%;
+  top:10%;
+  left:10%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.full-button {
+  background: #ffb300;
+  color: white;
+}
+
+

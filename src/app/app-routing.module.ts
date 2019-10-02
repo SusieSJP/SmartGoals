@@ -11,13 +11,11 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
 
-
-
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent}, {
-    path: 'mainpage/:id',
+    path: 'mainpage/:username',
     component: MainpageComponent,
     children: [
       {path: 'new-goal', component: NewGoalComponent},

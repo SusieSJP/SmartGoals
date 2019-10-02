@@ -1,0 +1,58 @@
+.center-column-bg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  margin-top: 8%;
+}
+
+span {
+  color: #ffb300;
+}
+
+.panel {
+  width: 80%;
+  margin-left: 10%;
+  margin-right:10%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  width: inherit;
+}
+
+.goal-info {
+  background-color: #BDBDBD;
+  padding:5%;
+}
+
+.goal-overall-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.chart-card {
+  border-radius: 15px;
+  margin-top: 5%;
+  border: #424242 solid;
+}
+.chart-title {
+  width: 100%;
+  background-color: #424242;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px 5px 0 0;
+}
+
+/* .chart {
+  background-color: #424242;
+} */

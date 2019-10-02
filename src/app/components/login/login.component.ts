@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {skip, take} from 'rxjs/operators';
-import {FakeUserAccountService} from 'src/app/services/fake-user-account.service';
 import {UserAccountService} from 'src/app/services/user-account.service';
 
 @Component({
