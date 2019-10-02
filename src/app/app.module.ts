@@ -14,11 +14,15 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CalendarHeatmap} from 'angular2-calendar-heatmap';
+import {NgxLiquidGaugeModule} from 'ngx-liquid-gauge';
 
 import {environment} from '../environments/environment';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {BarchartComponent} from './components/barchart/barchart.component';
+import {CalendarViewComponent} from './components/calendar-view/calendar-view.component';
 import {GoalManagementComponent} from './components/goal-management/goal-management.component';
 import {GroupsComponent} from './components/groups/groups.component';
 import {HomeComponent} from './components/home/home.component';
@@ -32,8 +36,6 @@ import {AngularFireGoalManagementService} from './services/af-goal-management.se
 import {AngularFireUserAccountService} from './services/af-user-account.service';
 import {GoalManagementService} from './services/goal-management.service';
 import {UserAccountService} from './services/user-account.service';
-import { CalendarViewComponent } from './components/calendar-view/calendar-view.component';
-import { BarchartComponent } from './components/barchart/barchart.component';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { BarchartComponent } from './components/barchart/barchart.component';
     GoalManagementComponent,
     CalendarViewComponent,
     BarchartComponent,
+    CalendarHeatmap,
 
   ],
   imports: [
@@ -73,6 +76,7 @@ import { BarchartComponent } from './components/barchart/barchart.component';
     MatTabsModule,
     MatCardModule,
     MatExpansionModule,
+    NgxLiquidGaugeModule,
 
   ],
   providers: [

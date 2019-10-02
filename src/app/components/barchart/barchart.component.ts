@@ -13,6 +13,7 @@ export class BarchartComponent implements OnInit {
 
   private margin: any = {top: 20, bottom: 50, left: 30, right: 30};
   private chart: any;
+  private bars: any;
   private width: number;
   private height: number;
   private newData = new Array<{date: string, progress: number}>();
@@ -20,37 +21,39 @@ export class BarchartComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    let curDate = this.data.startDate;
+    let curDate = new Date(this.data.startDate);
     let i = 0;
 
     for (i; i < this.data.dailyProgress.length; i++) {
       this.newData.push({
-        date: curDate.toLocaleDateString(),
+        date: new Date(curDate).toLocaleDateString(),
         progress: this.data.dailyProgress[i]
       });
       curDate.setDate(curDate.getDate() + 1);
     }
+
     this.onCreate();
   }
 
   onCreate() {
-    let element = this.chartContainer.nativeElement;
-    let svg = d3.select(element)
+    let containerDiv = this.chartContainer.nativeElement;
+    let svg = d3.select(containerDiv)
                   .append('svg')
-                  .attr('width', element.offsetWidth)
+                  .attr('width', containerDiv.offsetWidth)
                   .attr('height', 300);
-    this.width = 0.86 * element.offsetWidth;
+
+    this.width = 0.86 * containerDiv.offsetWidth;
     this.height = 300 - this.margin.top - this.margin.bottom;
 
     // chart plot area
-    this.chart =
-        svg.append('g')
-            .attr('class', 'bars')
-            .attr('width', this.width)
-            .attr('height', this.height)
-            .attr(
-                'transform',
-                `translate(${element.offsetWidth * 0.1}, ${this.margin.top})`);
+    this.chart = svg.append('g')
+                     .attr('class', 'bars')
+                     .attr('width', this.width)
+                     .attr('height', this.height)
+                     .attr(
+                         'transform',
+                         `translate(${containerDiv.offsetWidth * 0.1}, ${
+                             this.margin.top})`);
 
     const xAxisGroup = this.chart.append('g').attr(
         'transform', `translate(0, ${this.height})`);
@@ -79,20 +82,58 @@ export class BarchartComponent implements OnInit {
         .attr('transform', 'rotate(-40)')
         .attr('text-anchor', 'end');
 
-    this.chart.selectAll('.bar')
-        .data(this.newData)
-        .enter()
-        .append('rect')
-        .attr('class', 'bar')
+    this.bars = this.chart.selectAll('.bar')
+                    .data(this.newData)
+                    .enter()
+                    .append('g')
+                    .attr('class', 'bar');
+
+    this.bars.append('rect')
         .attr('width', scaleX.bandwidth)
         .attr('height', d => this.height - scaleY(d.progress))
-        .attr('fill', 'pink')
+        .attr('fill', '#512da8')
         .attr('x', d => scaleX(d.date))
         .attr('y', d => scaleY(d.progress));
+
+    this.bars.append('text')
+        .text(d => d.progress)
+        .attr('x', d => scaleX(d.date) + scaleX.bandwidth() / 2)
+        .attr('y', d => scaleY(d.progress) - 8)
+        .attr('text-anchor', 'middle')
+        .attr('color', 'white')
+        .attr('font-size', '0.75rem')
+        .style('visibility', 'hidden')
+
+        // add hover event
+        this.chart.selectAll('.bar')
+        .on('mouseover', this.handleMouseOver)
+        .on('mouseout', this.handleMouseOut)
   }
 
   onUpdate() {
     d3.selectAll('svg').remove();
     this.onCreate();
   }
+
+  handleMouseOver = ((d, i, n) => {
+    // d is the data element for each bar
+    // i is the index and the n is the array of bars, n[i] get us the
+    // element we hover over
+
+    d3.select(n[i])
+        .select('rect')
+        .transition('changeBarFill')
+        .duration(300)
+        .attr('fill', '#f9a825');
+    d3.select(n[i]).select('text').style('visibility', 'visible');
+  });
+
+  handleMouseOut = ((d, i, n) => {
+    d3.select(n[i])
+        .select('rect')
+        .transition('changeBarFill')
+        .duration(300)
+        .attr('fill', '#512da8');
+    d3.select(n[i]).select('text').style('visibility', 'hidden')
+  });
 }
