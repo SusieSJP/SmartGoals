@@ -48,7 +48,6 @@ export class AngularFireUserAccountService extends UserAccountService {
       this.loggedinUser = {email, userName: user.get('username')};
     });
     this.afDb.collection('users').doc(email).set({email, userName});
-    this.loggedinUser = {email, userName};
   }
 
 
