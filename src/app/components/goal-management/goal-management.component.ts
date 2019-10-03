@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Goal} from 'src/app/model/goal';
 import {GoalManagementService} from 'src/app/services/goal-management.service';
-import {UserAccountService} from 'src/app/services/user-account.service';
 
 @Component({
   selector: 'app-goal-management',
@@ -15,26 +15,19 @@ export class GoalManagementComponent implements OnInit {
   // today.
   date = new FormControl(new Date());
 
-  goalArr: Goal[];
+  goalArr$: Observable<Goal[]|null>;
   userEmail: string;
   // the key of the newProgress is the combination of goalId and date, the value
   // is the progress number
   newProgress = new Map<string, {id: string, date: Date, progress: number}>();
 
   constructor(
-      private afGoalService: GoalManagementService,
-      private userAccountService: UserAccountService) {}
-
-  ngOnInit() {
-    if (this.userAccountService.loggedinUser != null) {
-      this.userEmail = this.userAccountService.loggedinUser.email;
-    } else {
-      this.userEmail = 'test';
-    }
-
-    this.afGoalService.getGoals(this.userEmail)
-        .subscribe(goals => {this.goalArr = goals});
+      private goalService: GoalManagementService, private router: Router,
+      private route: ActivatedRoute) {
+    this.goalArr$ = this.goalService.activeGoals$;
   }
+
+  ngOnInit() {}
 
   onTempEditProgress(id: string, event: Event) {
     let changedDate: Date = this.date.value;
@@ -48,6 +41,10 @@ export class GoalManagementComponent implements OnInit {
 
   onUpdateProgress() {
     console.log(this.newProgress);
-    this.afGoalService.updateProgress(this.newProgress);
+    this.goalService.updateProgress(this.newProgress);
+  }
+
+  directToProgress() {
+    this.router.navigate(['../personal-progress'], {relativeTo: this.route});
   }
 }

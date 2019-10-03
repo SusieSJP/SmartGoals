@@ -1,1 +1,40 @@
-<p>profile works!</p>
+<div class="center-column-bg">
+  <div>
+    <h1>Edit Your <span>Lovely</span> Profile</h1>
+  </div>
+
+  <div class="center-row">
+    <div>
+        <form class="start-column">
+            <mat-form-field class="full-width left-margin">
+              <input matInput placeholder="Login Email" [value]="userEmail" disabled>
+            </mat-form-field>
+            <div class="input-row">
+                <mat-form-field class="full-width left-margin">
+                    <input matInput placeholder="User Name" [value]="userName" [disabled]="!editInfo" (input)="onUserName($event)">
+                  </mat-form-field>
+                  <button mat-flat-button class="full-button" (click)="editInfo=true">Edit</button>
+            </div>
+            <div class="input-row">
+                <mat-form-field class="full-width left-margin">
+                    <input matInput placeholder="Password" [disabled]="!editPwd" (input)="onPwd($event)">
+                  </mat-form-field>
+                  <button mat-flat-button class="full-button" (click)="editPwd=true">Reset</button>
+            </div>
+            <div class="input-row">
+                <p class="left-margin">Upload a New Photo</p>
+                <input type="file" (change)="uploadFile($event)">
+                <!-- <button mat-flat-button class="full-button" (click)="onUpload">Upload</button> -->
+            </div>
+
+          </form>
+    </div>
+    <div>
+      <div *ngIf="(downloadUrl$ | async) as downloadUrl">
+        <img class="photo-preview" [src]="downloadUrl">
+      </div>
+    </div>
+
+  </div>
+</div>
+

@@ -12,7 +12,7 @@
 
   <mat-tab-group class = "full-screen-bg">
     <mat-tab label="Active Goals" class="start-column">
-      <div *ngFor = "let goal of goalArr">
+      <div *ngFor = "let goal of (goalArr$ | async) ">
         <div *ngIf = "goal.endDate.getTime() >= date.value.getTime()" class="goal-card">
             <span>#{{ goal.name }}</span>
             <span>
@@ -25,12 +25,12 @@
       </div>
       <div class="end-row">
           <button (click)="onUpdateProgress()" mat-flat-button class="empty-button">Save New Progress</button>
-          <button mat-flat-button class="full-button">View Detailed Progress</button>
+          <button mat-flat-button class="full-button" (click)="directToProgress()">View Detailed Progress</button>
       </div>
     </mat-tab>
 
     <mat-tab label="Completed Goals">
-        <div *ngFor = "let goal of goalArr">
+        <div *ngFor = "let goal of (goalArr$ | async)">
           <div *ngIf = "date.value.getTime() > goal.endDate.getTime()" class="goal-card">
               <span>#{{ goal.name }}</span>
               <span>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="end-row">
-            <button mat-flat-button class="full-button">View Detailed Progress</button>
+            <button mat-flat-button class="full-button" (click)="directToProgress()">View Detailed Progress</button>
         </div>
     </mat-tab>
   </mat-tab-group>
