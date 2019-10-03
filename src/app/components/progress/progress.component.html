@@ -3,7 +3,7 @@
       <h1>My<span> Smart</span> Goals and Progress</h1>
     </div>
 
-    <div *ngFor="let goal of goalArr" class="panel">
+    <div *ngFor="let goal of (goalArr$ | async)" class="panel">
       <mat-accordion >
         <mat-expansion-panel>
             <mat-expansion-panel-header class = "panel-header">
@@ -63,11 +63,6 @@
                       <p style="margin-left: 15px">Progress Calendar Heatmap</p>
                     </div>
                     <div class="chart">
-                        <!-- <calendar-heatmap
-                          [data]="getProgressData(goal)"
-                          [color]="'#45ff00'"
-                          [overview]="overview">
-                        </calendar-heatmap> -->
                         <app-calendar-view [data] = "goal"></app-calendar-view>
                     </div>
                 </div>

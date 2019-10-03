@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OverviewType} from 'angular2-calendar-heatmap';
+import {Observable} from 'rxjs';
 import {Goal} from 'src/app/model/goal';
 import {GoalManagementService} from 'src/app/services/goal-management.service';
 
@@ -10,28 +11,27 @@ import {GoalManagementService} from 'src/app/services/goal-management.service';
 })
 export class ProgressComponent implements OnInit {
   panelOpenState = false;
-  goalArr: Goal[];
+  goalArr$: Observable<Goal[]|null>;
   userEmail: string;
   overview = OverviewType.year;
 
-  constructor(private afGoalService: GoalManagementService) {}
-
-  ngOnInit() {
-    this.goalArr = this.afGoalService.currGoals;
+  constructor(private goalService: GoalManagementService) {
+    this.goalArr$ = this.goalService.activeGoals$;
   }
+
+  ngOnInit() {}
+
   getOverallProgress(goal: Goal): number {
     return Math.round(
         goal.dailyProgress.reduce((a, b) => a + b) / goal.workload * 100);
   }
 
   getProgressData(goal: Goal): Array<{date: Date, total: number, details: []}> {
-    let newData = new Array<{date: Date, total: number, details: []}>();
-    let curDate = new Date(goal.startDate);
-    let i = 0;
+    const newData = new Array<{date: Date, total: number, details: []}>();
+    const curDate = new Date(goal.startDate);
 
-    for (i; i < goal.dailyProgress.length; i++) {
-      newData.push(
-          {date: new Date(curDate), total: goal.dailyProgress[i], details: []});
+    for (const progress of goal.dailyProgress) {
+      newData.push({date: new Date(curDate), total: progress, details: []});
       curDate.setDate(curDate.getDate() + 1);
     }
     return newData;
