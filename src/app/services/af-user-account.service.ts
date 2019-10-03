@@ -24,11 +24,6 @@ export class AngularFireUserAccountService extends UserAccountService {
     super();
   }
 
-  // this.afAuth.auth.setPersistence(this.afAuth.auth.Auth.Persistence.LOCAL).then(fucntion(){
-  //   return
-
-  // }))
-
   loginWithEmail(email: string, pwd: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, pwd)
         .then((credential: auth.UserCredential) => {
@@ -44,17 +39,16 @@ export class AngularFireUserAccountService extends UserAccountService {
         });
   }
 
-  loginWithGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-        .then((credential: auth.UserCredential) => {
-          this.loggedinUser = {
-            email: credential.user.email,
-            userName: credential.user.displayName
-          };
-        })
-        .catch((e) => {
-          console.log(e.message);
-        });
+  async loginWithGoogle() {
+    const credential: auth.UserCredential =
+        await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    const email = credential.user.email;
+    const userName = credential.user.displayName;
+    this.afDb.collection('users').doc(email).get().subscribe((user) => {
+      this.loggedinUser = {email, userName: user.get('username')};
+    });
+    this.afDb.collection('users').doc(email).set({email, userName});
+    this.loggedinUser = {email, userName};
   }
 
 
@@ -72,7 +66,7 @@ export class AngularFireUserAccountService extends UserAccountService {
         })
         .then((_) => {
           this.loggedinUser = {
-            email: email,
+            email,
             userName: uName,
           };
         })
