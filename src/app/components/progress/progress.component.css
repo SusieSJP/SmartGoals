@@ -53,6 +53,6 @@ span {
   border-radius: 5px 5px 0 0;
 }
 
-/* .chart {
-  background-color: #424242;
-} */
+.chart {
+  height: 180px;
+}

@@ -53,7 +53,7 @@
                   <div class="chart-title">
                     <p style="margin-left: 15px">Daily Progress Distribution</p>
                   </div>
-                  <div class="chart">
+                  <div>
                       <app-barchart [data] = "goal"></app-barchart>
                   </div>
                 </div>
@@ -63,11 +63,6 @@
                       <p style="margin-left: 15px">Progress Calendar Heatmap</p>
                     </div>
                     <div class="chart">
-                        <!-- <calendar-heatmap
-                          [data]="getProgressData(goal)"
-                          [color]="'#45ff00'"
-                          [overview]="overview">
-                        </calendar-heatmap> -->
                         <app-calendar-view [data] = "goal"></app-calendar-view>
                     </div>
                 </div>

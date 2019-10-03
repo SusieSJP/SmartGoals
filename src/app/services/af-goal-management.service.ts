@@ -96,25 +96,25 @@ export class AngularFireGoalManagementService extends GoalManagementService {
 
   updateProgress(newProgress:
                      Map<string, {id: string, date: Date, progress: number}>) {
-    newProgress.forEach(
-        (progressInfo,
-         key) => {this.afDatabase.collection('goals')
-                      .doc(progressInfo.id)
-                      .get()
-                      .subscribe((goal) => {
-                        let prevProgress = goal.get('dailyProgress');
-                        let start = goal.get('startDate').toDate();
-                        let index = Math.floor(
-                            (progressInfo.date.valueOf() - start.valueOf()) /
-                            (1000 * 3600 * 24));
-                        prevProgress[index] = progressInfo.progress;
+    newProgress.forEach((progressInfo, key) => {
+      this.afDatabase.collection('goals')
+          .doc(progressInfo.id)
+          .get()
+          .subscribe((goal) => {
+            let prevProgress = goal.get('dailyProgress');
+            let start = goal.get('startDate').toDate();
+            let index = Math.floor(
+                (progressInfo.date.valueOf() - start.valueOf()) /
+                (1000 * 3600 * 24));
+            prevProgress[index] = progressInfo.progress;
 
-                        this.afDatabase.collection('goals')
-                            .doc(progressInfo.id)
-                            .update({dailyProgress: prevProgress})
-                            .then(function() {
-                              console.log('Document successfully updated!');
-                            });
-                      })})
+            this.afDatabase.collection('goals')
+                .doc(progressInfo.id)
+                .update({dailyProgress: prevProgress})
+                .then(function() {
+                  console.log('Document successfully updated!');
+                });
+          });
+    })
   };
 }

@@ -16,7 +16,7 @@ export class CalendarViewComponent implements OnInit {
   // define a function to get the name of the day based on the index of the
   // day
   private formatDay =
-      d => ['Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat', 'Sun'][d.getUTCDay()];
+      d => ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'][d.getUTCDay()];
   private formatMonth = i =>
       ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct',
        'Nov', 'Dec'][i % 12];
@@ -24,7 +24,6 @@ export class CalendarViewComponent implements OnInit {
   private countDay = d => d.getUTCDay();
   // timeWeek.range(start,end) is a function that returns the sunday dates in
   // the [start, end] dates
-  private timeWeek = d3.utcSunday;
   private chart: any;
   private yearText: number;
   private colors: any;
@@ -54,7 +53,7 @@ export class CalendarViewComponent implements OnInit {
     let svg = d3.select(element)
                   .append('svg')
                   .attr('width', element.offsetWidth)
-                  .attr('height', element.offsetHeight);
+                  .attr('height', element.offsetHeight + 20);
 
     // chart plot area
     this.chart = svg.append('g')
@@ -106,29 +105,73 @@ export class CalendarViewComponent implements OnInit {
     // construct rectangles for total days (depend on the element.offsetWidth)
     // construct the dataset with default value 0 and progress at a specific
     // day.
-    let presetData = new Array<{index: number, value: number}>();
+    let presetData = new Array<{index: number, value: number, date: Date}>();
+    let firstDayOfMonth = new Date(
+        this.data.startDate.getFullYear(), this.data.startDate.getMonth(), 1);
+    firstDayOfMonth.setDate(
+        firstDayOfMonth.getDate() - this.countDay(firstDayOfMonth));
+    let curDate = new Date(firstDayOfMonth);
+
+    let j = 0;
     for (let i = 0; i < Math.floor((element.offsetWidth - 50) / 19) * 7; i++) {
-      presetData.push({index: i, value: 0});
+      if (j < this.newData.length &&
+          curDate.getTime() === this.newData[j].date.getTime()) {
+        presetData.push(
+            {index: i, value: this.newData[j].value, date: new Date(curDate)});
+        j += 1;
+      } else {
+        presetData.push({index: i, value: 0, date: new Date(curDate)});
+      }
+      curDate.setDate(curDate.getDate() + 1);
     }
 
-    for (let j = 0; j < this.newData.length; j++) {
-      let xIndex = this.timeWeek.count(
-          d3.utcMonth(this.data.startDate), this.newData[j].date);
-      let yIndex = this.countDay(this.newData[j].date);
-      let totalIndex = xIndex * 7 + yIndex - 1;
+    let rects = this.chart.selectAll('.day')
+                    .data(presetData)
+                    .enter()
+                    .append('g')
+                    .attr('class', 'day');
 
-      presetData[totalIndex].value = this.newData[j].value;
-    }
 
-    this.chart.append('g')
-        .selectAll('rect')
-        .attr('class', 'day')
-        .data(presetData)
-        .join('rect')
+
+    rects.append('rect')
         .attr('width', this.cellsize)
         .attr('height', this.cellsize)
         .attr('x', d => Math.floor(d.index / 7) * (this.cellsize + 3) + 40)
         .attr('y', d => (d.index % 7) * (this.cellsize + 2.5) + 10)
         .attr('fill', d => this.colors(d.value));
+
+    rects.append('text')
+        .text(
+            d => d.date.toLocaleString().slice(0, 10) + ': Complete ' + d.value)
+        .attr('x', d => Math.floor(d.index / 7) * (this.cellsize + 3) + 40)
+        .attr('y', 150)
+        .style('visibility', 'hidden')
+        .attr('font-size', '0.7rem');
+
+    // add hover event
+    this.chart.selectAll('.day')
+        .on('mouseover', this.handleMouseOver)
+        .on('mouseout', this.handleMouseOut);
   }
+
+  handleMouseOver = ((d, i, n) => {
+    // d is the data element for each bar
+    // i is the index and the n is the array of bars, n[i] get us the
+    // element we hover over
+    d3.select(n[i])
+        .select('rect')
+        .transition('highlightDay')
+        .duration(300)
+        .attr('fill', '#f9a825');
+    d3.select(n[i]).select('text').style('visibility', 'visible');
+  });
+
+  handleMouseOut = ((d, i, n) => {
+    d3.select(n[i])
+        .select('rect')
+        .transition('highlightDay')
+        .duration(200)
+        .attr('fill', this.colors(d.value));
+    d3.select(n[i]).select('text').style('visibility', 'hidden')
+  });
 }
