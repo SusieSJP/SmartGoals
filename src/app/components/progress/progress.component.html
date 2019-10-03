@@ -3,7 +3,7 @@
       <h1>My<span> Smart</span> Goals and Progress</h1>
     </div>
 
-    <div *ngFor="let goal of goalArr" class="panel">
+    <div *ngFor="let goal of (goalArr$ | async)" class="panel">
       <mat-accordion >
         <mat-expansion-panel>
             <mat-expansion-panel-header class = "panel-header">

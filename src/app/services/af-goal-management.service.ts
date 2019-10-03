@@ -1,77 +1,64 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {map, switchMap} from 'rxjs/operators';
 
 import {Goal} from '../model/goal';
+import {User} from '../model/user';
 
 import {GoalManagementService} from './goal-management.service';
+import {UserAccountService} from './user-account.service';
 
 @Injectable()
-export class AngularFireGoalManagementService extends GoalManagementService {
-  activeGoals = new BehaviorSubject<Goal[]|null>(null);
+export class AngularFireGoalManagementService extends GoalManagementService
+    implements OnDestroy {
+  activeGoals$ = new Observable<Goal[]>();
   private goals: Goal[]|null;
 
-  get currGoals(): Goal[]|null {
+  private goalsSubscription: Subscription;
+
+  getCurrGoals(): Goal[]|null {
     return this.goals;
   }
-  set currGoals(value: Goal[]|null) {
-    this.goals = value;
-    this.activeGoals.next(value);
-  }
 
-  constructor(public afDatabase: AngularFirestore) {
+  constructor(
+      public afDatabase: AngularFirestore,
+      userAccountService: UserAccountService) {
     super();
+    this.activeGoals$ = userAccountService.activeUser.pipe(switchMap(
+        (user: User|null) => user === null ? [] : this.fetchGoals(user.email)));
+    this.goalsSubscription =
+        this.activeGoals$.subscribe((goals) => this.goals = goals);
   }
 
-  getGoals(email: string): Observable<Goal[]> {
+  private fetchGoals(email: string): Observable<Goal[]> {
     return this.afDatabase
         .collection<any>(
             'goals',
             ref => ref.orderBy('startDate').where('userEmail', '==', email))
         .snapshotChanges()
-        .pipe(map(actions => {
-          this.currGoals = actions.map(snap => <Goal>{
-            id: snap.payload.doc.id,
-            name: snap.payload.doc.data().name,
-            startDate: snap.payload.doc.data().startDate.toDate(),
-            endDate: snap.payload.doc.data().endDate.toDate(),
-            workload: snap.payload.doc.data().workload,
-            avgWorkload: snap.payload.doc.data().avgWorkload,
-            dailyProgress: snap.payload.doc.data().dailyProgress,
-            groups: snap.payload.doc.data().groups,
-            userEmail: snap.payload.doc.data().userEmail,
-          });
-          return this.currGoals;
-        }));
-
-    // .snapshotChanges()
-    // .pipe(map(actions => {
-    //   let snap = actions[0];
-    //   this.currGoals =  {
-    //     const goal = <Goal>{
-    //       id: snap.payload.doc.id,
-    //       name: snap.payload.doc.data().name,
-    //       startDate: snap.payload.doc.data().startDate.toDate(),
-    //       endDate: snap.payload.doc.data().endDate.toDate(),
-    //       workload: snap.payload.doc.data().workload,
-    //       avgWorkload: snap.payload.doc.data().avgWorkload,
-    //       dailyProgress: snap.payload.doc.data().dailyProgress,
-    //       groups: snap.payload.doc.data().groups,
-    //       userEmail: snap.payload.doc.data().userEmail,
-    //     };
-    //   });
-    //   return this.currGoals;
-    // }));
+        .pipe(
+            map(actions => actions.map(
+                    snap => ({
+                      id: snap.payload.doc.id,
+                      name: snap.payload.doc.data().name,
+                      startDate: snap.payload.doc.data().startDate.toDate(),
+                      endDate: snap.payload.doc.data().endDate.toDate(),
+                      workload: snap.payload.doc.data().workload,
+                      avgWorkload: snap.payload.doc.data().avgWorkload,
+                      dailyProgress: snap.payload.doc.data().dailyProgress,
+                      groups: snap.payload.doc.data().groups,
+                      userEmail: snap.payload.doc.data().userEmail,
+                    } as Goal))));
   }
 
   addGoal(
       name: string, startDate: Date, endDate: Date, workload: number,
-      avgWorkload: number, email: string) {
-    let diffDays =
+      avgWorkload: number, email: string): void {
+    const diffDays =
         (endDate.valueOf() - startDate.valueOf()) / (1000 * 3600 * 24);
-    let dailyProgress = Array.from({length: diffDays}).fill(0);
-    let groups: number[] = [];
+    const dailyProgress = Array.from({length: diffDays}).fill(0);
+    const groups: number[] = [];
 
     this.afDatabase.collection('goals').add({
       name,
@@ -82,16 +69,12 @@ export class AngularFireGoalManagementService extends GoalManagementService {
       dailyProgress,
       groups,
       userEmail: email
-    })
-  };
+    });
+  }
 
-  getGoal(id: string) {
+  getGoal(id: string): Observable<Goal> {
     return this.afDatabase.collection('goals').doc(id).snapshotChanges().pipe(
-        map(snap => {
-          return <Goal> {
-            id: snap.payload.id, ...snap.payload.data()
-          }
-        }))
+        map(snap => ({id: snap.payload.id, ...snap.payload.data()} as Goal)));
   }
 
   updateProgress(newProgress:
@@ -101,9 +84,9 @@ export class AngularFireGoalManagementService extends GoalManagementService {
           .doc(progressInfo.id)
           .get()
           .subscribe((goal) => {
-            let prevProgress = goal.get('dailyProgress');
-            let start = goal.get('startDate').toDate();
-            let index = Math.floor(
+            const prevProgress = goal.get('dailyProgress');
+            const start = goal.get('startDate').toDate();
+            const index = Math.floor(
                 (progressInfo.date.valueOf() - start.valueOf()) /
                 (1000 * 3600 * 24));
             prevProgress[index] = progressInfo.progress;
@@ -111,10 +94,14 @@ export class AngularFireGoalManagementService extends GoalManagementService {
             this.afDatabase.collection('goals')
                 .doc(progressInfo.id)
                 .update({dailyProgress: prevProgress})
-                .then(function() {
+                .then(() => {
                   console.log('Document successfully updated!');
                 });
           });
-    })
-  };
+    });
+  }
+
+  ngOnDestroy() {
+    this.goalsSubscription.unsubscribe();
+  }
 }

@@ -14,15 +14,9 @@ export class LoginComponent implements OnInit {
   loginStatus = true;
 
   constructor(
-      private router: Router, private userAccountService: UserAccountService) {}
+      private router: Router, public userAccountService: UserAccountService) {}
 
-  ngOnInit() {}
-
-  onSubmit() {
-    console.log(this.loginForm);
-    this.userAccountService.loginWithEmail(
-        this.loginForm.value.email, this.loginForm.value.password);
-
+  ngOnInit() {
     this.userAccountService.activeUser.pipe(skip(1), take(1))
         .subscribe((user) => {
           if (user != null) {
@@ -32,5 +26,11 @@ export class LoginComponent implements OnInit {
             this.loginStatus = false;
           }
         });
+  }
+
+  onSubmit() {
+    console.log(this.loginForm);
+    this.userAccountService.loginWithEmail(
+        this.loginForm.value.email, this.loginForm.value.password);
   }
 }
