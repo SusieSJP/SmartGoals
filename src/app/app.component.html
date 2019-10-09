@@ -2,10 +2,10 @@
 <div *ngIf="!(path.startsWith('/mainpage'))">
     <mat-toolbar class="bar">
         <mat-toolbar-row>
-          <button role= "link" routerLink = "/" mat-button class="button-text">Home</button>
+          <button role= "link" routerLink = "/" mat-button class="button-text wide-margin">Home</button>
           <span class = "spacer-left-right"></span>
-          <button role= "link" routerLink = "/login" mat-button class="button-text">Log In</button>
-          <button role= "link" routerLink = "/signup" mat-flat-button>Sign Up</button>
+          <button role= "link" routerLink = "/login" mat-button class="button-text wide-margin">Log In</button>
+          <button role= "link" routerLink = "/signup" mat-flat-button class="wide-margin">Sign Up</button>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
@@ -18,7 +18,8 @@
 <!-- footer -->
 <mat-toolbar class="bar">
     <mat-toolbar-row style = "justify-content: center">
-      <span><button role= "link" mat-button class="button-text"> Thanks for visiting SmartGoals </button></span>
+      <p>Thanks for visiting SmartGoals</p>
+      <!-- <span><button role= "link" mat-button class="button-text">  </button></span> -->
     </mat-toolbar-row>
 </mat-toolbar>
 

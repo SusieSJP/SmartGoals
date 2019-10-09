@@ -8,7 +8,7 @@
 }
 
 .sidenav {
-  width: 300px;
+  width: 16%;
   background:#3e0c7a;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -41,7 +41,7 @@
   margin-right: auto;
   margin-bottom: 5%;
   border-radius: 50%;
-  width: 70%;
+  width: 80%;
 }
 
 .content {
@@ -87,6 +87,7 @@ h3 {
   font-family: 'Lalezar', cursive;
   font-size: 3em;
   color:black;
+  margin-block-start: 0px;
 }
 
 span {
@@ -101,7 +102,7 @@ span {
 .center-row {
   display: flex;
   align-items: center;
-  margin-top: 7%;
+  margin-top: 1%;
   padding-left: 10%;
 }
 
@@ -125,7 +126,7 @@ span {
   background:white;
   padding-bottom: 4%;
   width: 50%;
-  top:15%;
+  top:120px;
   left:8%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -133,7 +134,7 @@ span {
 .absolute-text {
   position: absolute;
   width: 50%;
-  top:2px;
+  top:30px;
   left:8%;
   text-align: center;
 }
@@ -141,9 +142,8 @@ span {
 .absolute-bgImg {
   position: absolute;
   padding: 2%;
-  width: 700px;
-  height: 500px;
-  bottom:2%;
+  width: 550px;
+  bottom:0px;
   right:2%;
 }
 
@@ -153,8 +153,7 @@ span {
 }
 
 .intro-img {
-  width: 700px;
-  height: 500px;
+  width: 600px;
 }
 
 .center-pic {
