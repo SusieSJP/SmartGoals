@@ -27,6 +27,7 @@ import {CalendarViewComponent} from './components/calendar-view/calendar-view.co
 import {GoalManagementComponent} from './components/goal-management/goal-management.component';
 import {GroupsComponent} from './components/groups/groups.component';
 import {HomeComponent} from './components/home/home.component';
+import {ImageCropperComponent} from './components/image-cropper/image-cropper.component';
 import {LoginComponent} from './components/login/login.component';
 import {MainpageComponent} from './components/mainpage/mainpage.component';
 import {NewGoalComponent} from './components/new-goal/new-goal.component';
@@ -35,6 +36,7 @@ import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
 import {AngularFireGoalManagementService} from './services/af-goal-management.service';
 import {AngularFireUserAccountService} from './services/af-user-account.service';
+import {AuthGuardService} from './services/auth-guard.service';
 import {GoalManagementService} from './services/goal-management.service';
 import {UserAccountService} from './services/user-account.service';
 
@@ -54,6 +56,7 @@ import {UserAccountService} from './services/user-account.service';
     CalendarViewComponent,
     BarchartComponent,
     CalendarHeatmap,
+    ImageCropperComponent,
 
   ],
   imports: [
@@ -89,6 +92,7 @@ import {UserAccountService} from './services/user-account.service';
       provide: GoalManagementService,
       useClass: AngularFireGoalManagementService
     },
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

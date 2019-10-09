@@ -10,12 +10,14 @@ import {NewGoalComponent} from './components/new-goal/new-goal.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
+import {AuthGuardService} from './services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent}, {
     path: 'mainpage/:username',
+    canActivate: [AuthGuardService],
     component: MainpageComponent,
     children: [
       {path: 'new-goal', component: NewGoalComponent},

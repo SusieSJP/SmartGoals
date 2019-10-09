@@ -8,8 +8,8 @@
 }
 
 .sidenav {
-  width: 20%;
-  background:#424242;
+  width: 300px;
+  background:#3e0c7a;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -30,6 +30,7 @@
 
   .margin-bottom {
     height: 5%;
+    text-align: center;
   }
 
 
@@ -63,28 +64,45 @@ a {
 }
 
 .menulist:hover {
-  background: #616161;
+  background: #684e95;
 }
 
 .router-link-active {
-  background: #f9a825;
+  background: #684e95;
 }
 
 h2 {
-  color: #f9a825;
+  color: white;
 }
 
 h1 {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 4.5em;
-  padding-left: 5%;
+  padding-left: 10%;
   margin-block-end: 0em;
   margin-block-start: 0em;
+}
+
+h3 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  color:black;
+}
+
+span {
+  color: #3e0c7a;
 }
 
 .name-text {
   font-size:2.5em;
   margin-block-start: 0.5em;
+}
+
+.center-row {
+  display: flex;
+  align-items: center;
+  margin-top: 7%;
+  padding-left: 10%;
 }
 
 .intro-text {
@@ -93,31 +111,40 @@ h1 {
   color: #f9a825;
 }
 
-.intro {
-  margin-left: 5%;
-  margin-block-end: 0em;
-  margin-block-start: 0em;
-  margin-top: 20%;
-}
-
 .header-bg {
   display: flex;
   height: 30%;
-  background-color: #512da8;
-  color: white;
+  background-color:#cabfdf;
+  color: #3f327a;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .absolute-position {
   position: absolute;
   background:white;
-  padding-bottom: 8%;
-  width: 80%;
-  top:10%;
-  left:10%;
+  padding-bottom: 4%;
+  width: 50%;
+  top:15%;
+  left:8%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.absolute-text {
+  position: absolute;
+  width: 50%;
+  top:2px;
+  left:8%;
+  text-align: center;
+}
+
+.absolute-bgImg {
+  position: absolute;
+  padding: 2%;
+  width: 700px;
+  height: 500px;
+  bottom:2%;
+  right:2%;
 }
 
 .full-button {
@@ -125,4 +152,13 @@ h1 {
   color: white;
 }
 
+.intro-img {
+  width: 700px;
+  height: 500px;
+}
 
+.center-pic {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 5%;
+}

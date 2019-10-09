@@ -18,6 +18,7 @@ span {
   width: 80%;
   margin-left: 10%;
   margin-right:10%;
+  margin-top:10%;
 }
 
 .panel-header {
@@ -27,7 +28,7 @@ span {
 }
 
 .goal-info {
-  background-color: #BDBDBD;
+  background-color: #e3e1ee;
   padding:5%;
 }
 

@@ -1,9 +1,4 @@
 
-h1 {
-  font-family: 'Lalezar', cursive;
-  font-size: 3em;
-  margin-top: 10%;
-}
 
 h2 {
   font-family: 'Lalezar', cursive;
@@ -11,10 +6,6 @@ h2 {
   margin-bottom:0;
   margin-top:0;
   color: #512da8;
-}
-
-span {
-  color: #ffb300;
 }
 
 .center-column-bg {
@@ -27,12 +18,12 @@ span {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 5%;
 }
 .center-row {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  flex-wrap: wrap;
   width:100%;
 }
 
@@ -46,7 +37,6 @@ span {
   text-align: center;
   flex-direction: column;
   padding-bottom: 5%;
-  padding-left: 50%;
   font-family: 'Source Sans Pro', sans-serif;
 }
 

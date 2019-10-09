@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="intro-header">
+  <div class="intro-text">
+    <h1>Smartly plan your goals <br>Timely track every progress <br>With SmartGoals </h1>
+    <button role="link" routerLink="/signup" class="full-button top-margin" mat-flat-button>Sign Up, It's Free!</button>
+  </div>
+  <div>
+    <img class="intro-img" [src]="introImgUrl">
+  </div>
+</div>
+<div class="feature-card">
+  <div>
+    <img class="intro-img" [src]="newGoalUrl">
+  </div>
+  <div>
+    <h3>Step 1: Fill in your goal information</h3>
+    <p>Quantify your total workload in terms of chapters or questions,
+      <br>adjust workload or deadline acccording to the computed average workload
+    <br>and finally add your smart goal! </p>
+  </div>
+</div>
+<div class="feature-card">
+  <div>
+      <h3>Step 2: Record your daily progress</h3>
+      <p>Choose a date to record progress,
+        <br>put the number that you completed for a specific date
+      <br>and check the overall progress for completed goals </p>
+    </div>
+    <div>
+      <img class="intro-img" [src]="goalManagaementUrl">
+    </div>
+
+  </div>
+  <div class="feature-card-column">
+      <h3 class="no-block-end">Done! Congrats!</h3>
+      <p>View your progress for different goals</p>
+      <div class="center-row">
+          <img class="intro-img-dubble" [src]="progress1">
+          <img class="intro-img-dubble" [src]="progress2">
+      </div>
+      <button role="link" routerLink="/signup" class="full-button top-margin" mat-flat-button>Start Today!</button>
+
+  </div>

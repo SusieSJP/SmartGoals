@@ -47,4 +47,9 @@ export class GoalManagementComponent implements OnInit {
   directToProgress() {
     this.router.navigate(['../personal-progress'], {relativeTo: this.route});
   }
+
+  getOverallProgress(goal: Goal): number {
+    return Math.round(
+        goal.dailyProgress.reduce((a, b) => a + b) / goal.workload * 100);
+  }
 }

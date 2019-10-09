@@ -4,11 +4,22 @@ margin: auto;
 width: 60%;
 }
 
+.center-bg {
+  text-align: center;
+  margin: 100px auto;
+  width: 60%;
+  }
+
 .wide-margin {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left:auto;
   margin-right:auto;
+}
+
+.full-button {
+  background: #ffb300;
+  color: white;
 }
 
 h1 {
