@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 
 import {Goal} from '../model/goal';

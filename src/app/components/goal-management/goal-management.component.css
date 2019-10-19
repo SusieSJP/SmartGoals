@@ -4,39 +4,29 @@
   flex-direction: column;
 }
 
-h1 {
-  font-family: 'Lalezar', cursive;
-  font-size: 3em;
-  margin-top: 8%;
-}
-
-span {
-  color: #ffb300;
-}
-
 .mat-form-field {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   font-family: Roboto,"Helvetica Neue",sans-serif;
   width: 300px;
+  margin-top: 10%;
 }
 
 .full-screen-bg {
   width: 80%;
-  border-color: #9e9e9e;
-  border-style: solid;
+  border: dashed #351270 5px;
   padding: 4%;
   border-radius: 15px;
   margin-top: 4%;
 }
 
 .goal-card {
-  padding:1% 3%;
+  padding:3% 2%;
   height: 20px;
   margin: 2% auto;
-  width: 92%;
-  background-color:#ffe082;
+  width: 96%;
+  background-color:#ffd35a;
   color: #616161;
   border-radius: 15px;
   display: flex;

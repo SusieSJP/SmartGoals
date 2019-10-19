@@ -30,10 +30,22 @@ export class NewGoalComponent implements OnInit {
   }
   onGoalWorkload(event: Event) {
     this.goalWorkload = +(<HTMLInputElement>event.target).value;
+    if (this.goalStartDate && this.goalEndDate &&
+        this.goalStartDate < this.goalEndDate) {
+      this.diffDays = Math.floor(
+          (this.goalEndDate.valueOf() - this.goalStartDate.valueOf()) /
+          (1000 * 3600 * 24));
+      this.avgWorkload = this.goalWorkload / this.diffDays;
+    }
   }
   onStartDate(event: MatDatepickerInputEvent<Date>) {
     this.goalStartDate = event.value;
-    console.log(typeof (this.goalStartDate))
+    if (this.goalEndDate && this.goalStartDate < this.goalEndDate) {
+      this.diffDays = Math.floor(
+          (this.goalEndDate.valueOf() - this.goalStartDate.valueOf()) /
+          (1000 * 3600 * 24));
+      this.avgWorkload = this.goalWorkload / this.diffDays;
+    }
   }
   onEndDate(event: MatDatepickerInputEvent<Date>) {
     this.goalEndDate = event.value;

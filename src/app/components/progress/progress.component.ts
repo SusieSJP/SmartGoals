@@ -25,15 +25,4 @@ export class ProgressComponent implements OnInit {
     return Math.round(
         goal.dailyProgress.reduce((a, b) => a + b) / goal.workload * 100);
   }
-
-  getProgressData(goal: Goal): Array<{date: Date, total: number, details: []}> {
-    const newData = new Array<{date: Date, total: number, details: []}>();
-    const curDate = new Date(goal.startDate);
-
-    for (const progress of goal.dailyProgress) {
-      newData.push({date: new Date(curDate), total: progress, details: []});
-      curDate.setDate(curDate.getDate() + 1);
-    }
-    return newData;
-  }
 }

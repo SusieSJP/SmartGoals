@@ -1,1 +1,39 @@
-<p>profile works!</p>
+
+  <div class="center-column">
+    <div>
+        <form class="start-column">
+            <mat-form-field class="full-width left-margin">
+              <input matInput placeholder="Login Email" [value]="userEmail" disabled>
+            </mat-form-field>
+            <div>
+                <mat-form-field class="full-width left-margin">
+                    <input matInput placeholder="User Name" [value]="userName" [disabled]="!editInfo" (input)="onUserName($event)">
+                  </mat-form-field>
+                  <button mat-flat-button class="full-button" (click)="editInfo=true">Edit</button>
+            </div>
+            <div>
+                <mat-form-field class="full-width left-margin">
+                    <input matInput placeholder="Password" [disabled]="!editPwd" (input)="onPwd($event)">
+                  </mat-form-field>
+                  <button mat-flat-button class="full-button" (click)="editPwd=true">Reset</button>
+            </div>
+
+          </form>
+    </div>
+    <button mat-flat-button class="full-button" (click)="updateInfo()">Save</button>
+
+    <div class="dash-border">
+      <div class="start-column">
+        <p class="left-margin">Upload a New Photo</p>
+        <input type="file" (change)="uploadFile($event)">
+      </div>
+
+      <div *ngIf="editPhoto && testUrl" >
+        <app-image-cropper [imageSource]="testUrl" (newPhoto)="uploadPhoto($event)"></app-image-cropper>
+      </div>
+    </div>
+
+
+  </div>
+
+

@@ -1,7 +1,5 @@
 <div class="center-column-bg">
-    <div>
-      <h1>My<span> Smart</span> Goals and Progress</h1>
-    </div>
+
 
     <div *ngFor="let goal of (goalArr$ | async)" class="panel">
       <mat-accordion >
@@ -20,7 +18,7 @@
                   <div>
                       <p>Start Date: {{ goal.startDate.toLocaleDateString()}}</p>
                       <p>Due Date: {{ goal.endDate.toLocaleDateString()}}</p>
-                      <p>Expected Daily Progress: {{ goal.avgWorkload}}</p>
+                      <p>Expected Daily Progress: {{ goal.avgWorkload | number:'1.1-1'}}</p>
                   </div>
                   <div>
                       <lib-ngx-liquid-gauge
@@ -29,7 +27,7 @@
                         [maxValue]="100"
                         [circleThickness]="0.2"
                         [circleFillGap]="0.05"
-                        [circleColor]="'#FFA000'"
+                        [circleColor]="'#3f327a'"
                         [waveHeight]="0.1"
                         [waveCount]="2"
                         [waveRiseTime]="4000"
@@ -37,14 +35,14 @@
                         [waveRise]="true"
                         [waveHeightScaling]="true"
                         [waveAnimate]="true"
-                        [waveColor]="'#FFCA28'"
+                        [waveColor]="'#cabfdf'"
                         [waveOffset]="0"
                         [textVertPosition]=".5"
                         [textSize]="1"
                         [valueCountUp]="true"
                         [displayPercent]="true"
-                        [textColor]="'#FFB330'"
-                        [waveTextColor]="'#757575'">
+                        [textColor]="'#3f327a'"
+                        [waveTextColor]="'#7063ab'">
                       </lib-ngx-liquid-gauge>
                   </div>
                 </div>
@@ -53,7 +51,7 @@
                   <div class="chart-title">
                     <p style="margin-left: 15px">Daily Progress Distribution</p>
                   </div>
-                  <div class="chart">
+                  <div>
                       <app-barchart [data] = "goal"></app-barchart>
                   </div>
                 </div>

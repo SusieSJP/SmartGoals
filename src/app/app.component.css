@@ -1,3 +1,22 @@
+p {
+ color:white;
+ font-size: 12px;
+}
+
 .spacer-left-right {
   flex: 1 1 auto
 }
+
+.bar {
+  background-color: #351270;
+}
+
+.button-text {
+  color: white;
+}
+
+.wide-margin {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
