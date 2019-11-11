@@ -1,0 +1,72 @@
+.center-column-bg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mat-form-field {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  width: 300px;
+  margin-top: 10%;
+}
+
+.full-screen-bg {
+  width: 80%;
+  border: dashed #351270 5px;
+  padding: 4%;
+  border-radius: 15px;
+  margin-top: 4%;
+}
+
+.goal-card {
+  padding:3% 2%;
+  height: 20px;
+  margin: 2% auto;
+  width: 96%;
+  background-color:#ffd35a;
+  color: #616161;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:0.9rem;
+}
+
+.emphsis {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.input-box {
+  width: 30px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1.25rem;
+}
+
+.end-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 5%;
+}
+
+.full-button {
+  background: #ffb300;
+  margin-right: 10px;
+  color:white;
+}
+
+.empty-button {
+  border-style: solid;
+  border-color: #ff8f00;
+  margin-right: 10px;
+  color: #616161;
+}

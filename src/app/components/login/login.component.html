@@ -31,6 +31,10 @@
           <button class = "wide-margin" mat-raised-button color="primary"
                   [disabled]="!f.valid">Log In</button>
         </form>
+        <button class="wide-margin full-button" mat-flat-button
+                (click)="userAccountService.loginWithGoogle()">
+                Log In with Google
+              </button>
       </div>
 
   </div>

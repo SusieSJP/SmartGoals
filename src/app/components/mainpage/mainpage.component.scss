@@ -1,0 +1,163 @@
+
+.sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidenav {
+  width: 16%;
+  background:#3e0c7a;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+::ng-deep {
+  .mat-drawer-inner-container {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width:inherit;
+  }
+
+  .margin-bottom {
+    height: 5%;
+    text-align: center;
+  }
+
+
+.profile-pict {
+  display: block;
+  margin-top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  border-radius: 50%;
+  width: 80%;
+}
+
+.content {
+  background:#eeeeee;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.menulist {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  font-size: 1.1rem;
+  padding-inline-start: 0;
+  display: flex;
+  justify-content: center;
+  width:inherit;
+}
+
+.menulist:hover {
+  background: #684e95;
+}
+
+.router-link-active {
+  background: #684e95;
+}
+
+h2 {
+  color: white;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 4.5em;
+  padding-left: 10%;
+  margin-block-end: 0em;
+  margin-block-start: 0em;
+}
+
+h3 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  color:black;
+  margin-block-start: 0px;
+}
+
+span {
+  color: #3e0c7a;
+}
+
+.name-text {
+  font-size:2.5em;
+  margin-block-start: 0.5em;
+}
+
+.center-row {
+  display: flex;
+  align-items: center;
+  margin-top: 1%;
+  padding-left: 10%;
+}
+
+.intro-text {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 2.5rem;
+  color: #f9a825;
+}
+
+.header-bg {
+  display: flex;
+  height: 30%;
+  background-color:#cabfdf;
+  color: #3f327a;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.absolute-position {
+  position: absolute;
+  background:white;
+  padding-bottom: 4%;
+  width: 50%;
+  top:120px;
+  left:8%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.absolute-text {
+  position: absolute;
+  width: 50%;
+  top:30px;
+  left:8%;
+  text-align: center;
+}
+
+.absolute-bgImg {
+  position: absolute;
+  padding: 2%;
+  width: 550px;
+  bottom:0px;
+  right:2%;
+}
+
+.full-button {
+  background: #ffb300;
+  color: white;
+}
+
+.intro-img {
+  width: 600px;
+}
+
+.center-pic {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 5%;
+}

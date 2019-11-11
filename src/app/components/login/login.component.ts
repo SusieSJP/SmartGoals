@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {FakeUserAccountService} from 'src/app/services/fake-user-account.service';
+import {skip, take} from 'rxjs/operators';
 import {UserAccountService} from 'src/app/services/user-account.service';
 
 @Component({
@@ -14,20 +14,22 @@ export class LoginComponent implements OnInit {
   loginStatus = true;
 
   constructor(
-      private router: Router, private userAccountService: UserAccountService) {}
+      private router: Router, public userAccountService: UserAccountService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userAccountService.activeUser.pipe(skip(1), take(1))
+        .subscribe((user) => {
+          if (user != null) {
+            this.router.navigate(['/mainpage', user.userName]);
+          } else {
+            this.loginForm.reset();
+            this.loginStatus = false;
+          }
+        });
+  }
 
   onSubmit() {
-    console.log(this.loginForm)
-    let user = this.userAccountService.login(
+    this.userAccountService.loginWithEmail(
         this.loginForm.value.email, this.loginForm.value.password);
-
-    if (user != null) {
-      this.router.navigate(['/mainpage', user.userName]);
-    } else {
-      this.loginForm.reset();
-      this.loginStatus = false;
-    }
   }
 }

@@ -1,0 +1,34 @@
+.photo-preview {
+  width: 250px;
+  height: 250px;
+  margin-top: 10%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.final-image {
+  width: 250px;
+  height: 250px;
+  margin-top: 10%;
+  border-radius: 50%;
+}
+
+.full-button {
+  background: #ffb300;
+  width: 80px;
+  margin-right: 10px;
+  margin-left: 10px;
+  color:white;
+  margin-bottom: 10%;
+  margin-top: 10%;
+}
+
+.center-column-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3%;
+}
+

@@ -1,6 +1,6 @@
 .center {
   text-align: center;
-  margin: auto;
+  margin: 100px auto;
   width: 60%;
   }
 
@@ -33,4 +33,9 @@
     font-size: 0.8em;
     font-style: italic;
     color: red;
+  }
+
+  .full-button {
+    background: #ffb300;
+    color: white;
   }

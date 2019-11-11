@@ -1,4 +1,4 @@
-<div class = "center">
+<div class = "center-bg">
 
     <div class = "wide-margin">
         <h1>Create a SmartGoals Account</h1>
@@ -30,6 +30,10 @@
                     [disabled]="f.invalid"
                     (click)="onCreateAccount(f)">Submit</button>
         </form>
+        <button class="wide-margin full-button" mat-flat-button
+                (click)="userAccountService.loginWithGoogle()">
+                Log In with Google
+        </button>
     </div>
 
 </div>
