@@ -2,9 +2,9 @@
 # env files
 environments/*
 environment.ts
+env.development
 
 # compiled output
-/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run

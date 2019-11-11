@@ -7,9 +7,9 @@
             </mat-form-field>
             <div>
                 <mat-form-field class="full-width left-margin">
-                    <input matInput placeholder="User Name" [value]="userName" [disabled]="!editInfo" (input)="onUserName($event)">
+                    <input matInput placeholder="User Name" [value]="userName" [disabled]="!editName" (input)="onUserName($event)">
                   </mat-form-field>
-                  <button mat-flat-button class="full-button" (click)="editInfo=true">Edit</button>
+                  <button mat-flat-button class="full-button" (click)="editName=true">Edit</button>
             </div>
             <div>
                 <mat-form-field class="full-width left-margin">
