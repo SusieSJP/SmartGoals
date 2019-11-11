@@ -11,18 +11,21 @@
         <form class="form" (ngSubmit) = "onSubmit()" #f="ngForm" class="center-input">
           <mat-form-field class="full-width">
             <!-- required/email here are validators -->
-              <textarea ngModel name="email"
+              <input ngModel name="email"
                         required email
                         #email = "ngModel"
-                        matInput placeholder="Email"></textarea>
+                        matInput placeholder="Email"/>
           </mat-form-field>
           <p class="invalid-msg" *ngIf="!email.valid && email.touched">* Please enter a valid email address</p>
 
           <mat-form-field class="full-width">
-              <textarea ngModel name="password"
-                        required
-                        #pwd = "ngModel"
-                        matInput placeholder="Password"></textarea>
+              <input ngModel
+                     matInput
+                     name="password"
+                     required
+                     #pwd="ngModel"
+                     type="password"
+                     placeholder="Password"/>
           </mat-form-field>
           <p class="invalid-msg" *ngIf="!pwd.valid && pwd.touched">* This is a required field</p>
           <!-- if we put the button inside the form element, this button will submit the form,

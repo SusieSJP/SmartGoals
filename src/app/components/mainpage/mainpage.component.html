@@ -9,7 +9,7 @@
         <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToGoalManagemennt()"><a [routerLink]="['goal-management']">Goals Management</a></div>
         <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToProgress()"><a [routerLink]="['personal-progress']">Personal Progress</a></div>
         <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToProfile()"><a [routerLink]="['profile']">Edit Profile</a></div>
-        <div class="menulist" routerLinkActive ="router-link-active" [routerLinkActiveOptions] = "{exact: true}" (click)="mainpage=false"><a routerLink="">Log Out</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active" [routerLinkActiveOptions] = "{exact: true}" (click)="isMainpage=false"><a routerLink="">Log Out</a></div>
     </div>
     <div class="margin-bottom">
       <div *ngIf="!user.photoUrl">@Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
