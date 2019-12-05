@@ -102,8 +102,9 @@ span {
 .center-row {
   display: flex;
   align-items: center;
+  // justify-content: space-around;
   margin-top: 1%;
-  padding-left: 10%;
+  margin-left: 10%;
 }
 
 .intro-text {
@@ -114,11 +115,10 @@ span {
 
 .header-bg {
   display: flex;
-  height: 30%;
+  height: 250px;
   background-color:#cabfdf;
   color: #3f327a;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
 }
 
 .absolute-position {
@@ -131,33 +131,11 @@ span {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.absolute-text {
-  position: absolute;
-  width: 50%;
-  top:30px;
-  left:8%;
-  text-align: center;
-}
-
-.absolute-bgImg {
-  position: absolute;
-  padding: 2%;
-  width: 550px;
-  bottom:0px;
-  right:2%;
-}
-
 .full-button {
   background: #ffb300;
   color: white;
 }
 
 .intro-img {
-  width: 600px;
-}
-
-.center-pic {
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 5%;
+  width: 900px;
 }

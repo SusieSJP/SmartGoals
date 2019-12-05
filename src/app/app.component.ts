@@ -1,7 +1,7 @@
 import 'hammerjs';
 
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Event, Router, RouterEvent} from '@angular/router';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +9,9 @@ import {ActivatedRoute, Event, Router, RouterEvent} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'smart-goals-app';
-  path = '';
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof RouterEvent) {
-        this.path = event.url;
-      }
-    });
+    this.userService.autoLogin();
   }
 }

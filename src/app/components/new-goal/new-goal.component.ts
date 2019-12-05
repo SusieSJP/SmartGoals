@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 import {MatDatepickerInputEvent} from '@angular/material';
-import {AngularFireGoalManagementService} from 'src/app/services/af-goal-management.service';
-import {UserAccountService} from 'src/app/services/user-account.service';
+import {GoalService} from 'src/app/services/goal.service';
+import {ImageService} from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-new-goal',
@@ -18,12 +19,20 @@ export class NewGoalComponent implements OnInit {
   diffDays: number = 0;
   // avgWorkload is the expected daily workload
   avgWorkload: number = 0.0;
+  newGoalUrl: string = '';
+
+  // result of adding new goal
+  isLoading: boolean = false;
+  successfulMsg: string;
+  errorMsg: string;
 
   constructor(
-      private afGoalService: AngularFireGoalManagementService,
-      private userAccountService: UserAccountService) {}
+      // private afGoalService: AngularFireGoalManagementService,
+      private goalService: GoalService, private imgService: ImageService) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.newGoalUrl = await this.imgService.loadImg('imgAssets/newgoal.png');
+  }
 
   onGoalName(event: Event) {
     this.goalName = (<HTMLInputElement>event.target).value;
@@ -57,9 +66,22 @@ export class NewGoalComponent implements OnInit {
     }
   }
 
-  onCreateGoal() {
-    this.afGoalService.addGoal(
-        this.goalName, this.goalStartDate, this.goalEndDate, this.goalWorkload,
-        this.avgWorkload, this.userAccountService.loggedinUser.email);
+  onCreateGoal(form: NgForm) {
+    this.isLoading = true;
+    this.goalService
+        .addGoal(
+            this.goalName, this.goalStartDate, this.goalEndDate,
+            this.goalWorkload, this.avgWorkload)
+        .then(() => {
+          this.isLoading = false;
+          this.successfulMsg = 'New goal added!';
+          this.errorMsg = '';
+          form.reset();
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          this.errorMsg = error.message;
+          this.successfulMsg = '';
+        });
   }
 }

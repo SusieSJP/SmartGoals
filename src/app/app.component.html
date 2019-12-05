@@ -1,25 +1,26 @@
+
 <!-- navbars -->
-<div *ngIf="!(path.startsWith('/mainpage'))">
+<div *ngIf="!userService.isloggedIn">
     <mat-toolbar class="bar">
         <mat-toolbar-row>
-          <button role= "link" routerLink = "/" mat-button class="button-text wide-margin">Home</button>
-          <span class = "spacer-left-right"></span>
+          <button role= "link" routerLink = "/" mat-button class="button-text wide-margin">Smart Goals</button>
+          <span class = "space"></span>
           <button role= "link" routerLink = "/login" mat-button class="button-text wide-margin">Log In</button>
           <button role= "link" routerLink = "/signup" mat-flat-button class="wide-margin">Sign Up</button>
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
 
-<div>
+<div class="space">
     <router-outlet></router-outlet>
 </div>
 
-
+<!--
+<div class="space"></div> -->
 <!-- footer -->
 <mat-toolbar class="bar">
     <mat-toolbar-row style = "justify-content: center">
       <p>Thanks for visiting SmartGoals</p>
-      <!-- <span><button role= "link" mat-button class="button-text">  </button></span> -->
     </mat-toolbar-row>
 </mat-toolbar>
 

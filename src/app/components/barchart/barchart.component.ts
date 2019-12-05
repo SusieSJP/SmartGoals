@@ -72,7 +72,7 @@ export class BarchartComponent implements OnInit {
                        .paddingOuter(0.2);
 
     // x and y axis
-    const xAxis = d3.axisBottom(scaleX);
+    const xAxis = d3.axisBottom(scaleX).ticks(15);
     const yAxis = d3.axisLeft(scaleY).ticks(5);
 
     xAxisGroup.call(xAxis);
@@ -96,7 +96,7 @@ export class BarchartComponent implements OnInit {
         .attr('y', d => scaleY(d.progress));
 
     this.bars.append('text')
-        .text(d => d.progress)
+        .text(d => d.date.toLocaleString().slice(0, 10) + ': ' + d.progress)
         .attr('x', d => scaleX(d.date) + scaleX.bandwidth() / 2)
         .attr('y', d => scaleY(d.progress) - 8)
         .attr('text-anchor', 'middle')

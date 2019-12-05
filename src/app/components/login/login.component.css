@@ -1,7 +1,10 @@
 .center {
   text-align: center;
-  margin: 100px auto;
-  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   }
 
   .wide-margin {
@@ -15,7 +18,7 @@
   }
 
   .form {
-    width: 100%;
+    width: 60%;
   }
 
   .center-input {
@@ -29,7 +32,7 @@
 
   .invalid-msg {
     font-family: 'Source Sans Pro', sans-serif;
-    text-align:left;
+    text-align:center;
     font-size: 0.8em;
     font-style: italic;
     color: red;

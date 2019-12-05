@@ -1,62 +1,27 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" #sidenav mode="side" opened>
     <div class="center">
-        <img class="profile-pict" [src]="user.photoUrl">
-        <h2>{{ user.userName }}</h2>
+        <img class="profile-pict" [src]="userPhotoURL">
+        <h2>{{ userName }}</h2>
     </div>
     <div class="center">
-        <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToNewGoal()"><a [routerLink]="['new-goal']">New Goals</a></div>
-        <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToGoalManagemennt()"><a [routerLink]="['goal-management']">Goals Management</a></div>
-        <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToProgress()"><a [routerLink]="['personal-progress']">Personal Progress</a></div>
-        <div class="menulist" routerLinkActive ="router-link-active" (click)="changePageToProfile()"><a [routerLink]="['profile']">Edit Profile</a></div>
-        <div class="menulist" routerLinkActive ="router-link-active" [routerLinkActiveOptions] = "{exact: true}" (click)="mainpage=false"><a routerLink="">Log Out</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active"><a [routerLink]="['new-goal']">New Goals</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active"><a [routerLink]="['goal-management']">Goals Overview</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active"><a [routerLink]="['personal-progress']">Personal Progress</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active"><a [routerLink]="['profile']">Edit Profile</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active" [routerLinkActiveOptions] = "{exact: true}"><a [routerLink]="['./']">Home</a></div>
+        <div class="menulist" routerLinkActive ="router-link-active" [routerLinkActiveOptions] = "{exact: true}" (click)="onLogout()"><a routerLink="">Log Out</a></div>
     </div>
     <div class="margin-bottom">
-      <div *ngIf="!user.photoUrl">@Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div *ngIf="defaultPhoto">@Icons made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
-    <div class="header-bg">
-      <h1 *ngIf="isMainpage">Welcome,</h1>
-    </div>
-    <div *ngIf="isMainpage" class="center-row">
-      <div>
-          <p class="intro-text">Get started by adding <br>new Smart Goal!</p>
-          <a [routerLink]="['new-goal']" (click)="changePageToNewGoal()"><button mat-flat-button class="full-button">Add New Goal</button></a>
-      </div>
-      <div class="center-pic">
-        <img [src]="mainpageImgUrl" class="intro-img">
-      </div>
-    </div>
-    <ng-container *ngIf="!isMainpage">
-      <div [ngSwitch]="pageName">
-        <div *ngSwitchCase="'newGoal'">
-            <div class="absolute-text"><h3>Set Up Your <span>New</span> Goal</h3></div>
-            <img [src]="bgImgUrlNewGoal" class="absolute-bgImg">
-        </div>
-        <div *ngSwitchCase="'goalManagement'">
-            <div class="absolute-text"><h3>Record Your <span>New</span> Progress</h3></div>
-            <img [src]="bgImgUrlGoalM" class="absolute-bgImg">
-        </div>
-        <div *ngSwitchCase="'progress'">
-            <div class="absolute-text"><h3>View Your <span>Overall</span> Progress</h3></div>
-            <img [src]="bgImgUrlProgress" class="absolute-bgImg">
-        </div>
-        <div *ngSwitchCase="'editProfile'">
-            <div class="absolute-text"><h3>Edit Your <span>Lovely</span> Progress</h3></div>
-            <img [src]="bgImgUrlProfile" class="absolute-bgImg">
-        </div>
-        <div *ngSwitchDefault></div>
-      </div>
-      <div class="absolute-position">
-          <router-outlet></router-outlet>
-      </div>
-    </ng-container>
-
-
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
 
 

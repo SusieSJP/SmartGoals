@@ -1,19 +1,19 @@
 h1 {
-  font-size: 2.7em;
+  font-size: 3em;
   color: #7063ab;
   font-family: 'Lalezar', cursive;
   line-height: 150%;
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
   font-family: 'Source Sans Pro', sans-serif;
   line-height: 150%;
 }
 
 p {
-  font-size: 15px;
+  font-size: 1.2rem;
   color: white;
   font-family: 'Source Sans Pro', sans-serif;
   line-height: 180%;
@@ -52,7 +52,9 @@ p {
   background: #ffb300;
   color: white;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
+  font-size: 1.3rem;
+  padding: 10px 20px;
 }
 
 .feature-card {

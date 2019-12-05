@@ -1,37 +1,38 @@
 <div class = "center-bg">
-
     <div class = "wide-margin">
         <h1>Create a SmartGoals Account</h1>
     </div>
-
     <div class = "center">
-        <form class="form" #f="ngForm">
+        <form class="form" #f="ngForm" (ngSubmit)="onCreateAccount(f)">
             <mat-form-field class="full-width">
-                <textarea required email
+                <input required email
                           ngModel name="email"
                           #email = "ngModel"
-                          matInput placeholder="Email"></textarea>
+                          matInput placeholder="Email">
             </mat-form-field>
             <p *ngIf="!email.valid && email.touched" class="invalid-msg">*Please enter valid email address</p>
 
             <mat-form-field class="full-width">
-              <textarea required
+              <input required
                         ngModel name="userName"
-                        matInput placeholder="User Name"></textarea>
+                        matInput placeholder="User Name">
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <textarea required
+                <input required [type]="hide ? 'password' : 'text'"
                           ngModel name="password"
-                          matInput placeholder="Password"></textarea>
+                          matInput placeholder="Password">
+                <button mat-icon-button matSuffix (click)="hide = !hide"
+                          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
             </mat-form-field>
 
             <button class = "wide-margin" mat-raised-button color="primary"
-                    [disabled]="f.invalid"
-                    (click)="onCreateAccount(f)">Submit</button>
+                    [disabled]="f.invalid" type="submit">Submit</button>
         </form>
         <button class="wide-margin full-button" mat-flat-button
-                (click)="userAccountService.loginWithGoogle()">
+                (click)="userService.loginWithGoogle()">
                 Log In with Google
         </button>
     </div>

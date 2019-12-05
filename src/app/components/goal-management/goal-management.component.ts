@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
 import {Goal} from 'src/app/model/goal';
-import {GoalManagementService} from 'src/app/services/goal-management.service';
+import {GoalService} from 'src/app/services/goal.service';
+import {ImageService} from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-goal-management',
@@ -14,34 +14,54 @@ export class GoalManagementComponent implements OnInit {
   // date is the variable that user picks in the calender, the default value is
   // today.
   date = new FormControl(new Date());
-
-  goalArr$: Observable<Goal[]|null>;
+  goalArr: Goal[];
   userEmail: string;
   // the key of the newProgress is the combination of goalId and date, the value
   // is the progress number
-  newProgress = new Map<string, {id: string, date: Date, progress: number}>();
+  newProgress = new Map<string, {name: string, date: Date, progress: number}>();
+
+  goalManageUrl: string = '';
+
+  isLoading = false;
+  updateMsg: string[] = [];
 
   constructor(
-      private goalService: GoalManagementService, private router: Router,
-      private route: ActivatedRoute) {
-    this.goalArr$ = this.goalService.activeGoals$;
+      private goalService: GoalService, private router: Router,
+      private route: ActivatedRoute, private imageService: ImageService) {}
+
+  async ngOnInit() {
+    this.goalManageUrl = await this.imageService.loadImg(
+        'imgAssets/shutterstock_1476500120 (2).png');
+    await this.goalService.loadGoalData();
+    this.goalService.activeGoals$.subscribe((goals) => {
+      this.goalArr = goals;
+    });
+    console.log('goal Arr for goal management component: ', this.goalArr);
   }
 
-  ngOnInit() {}
-
-  onTempEditProgress(id: string, event: Event) {
-    let changedDate: Date = this.date.value;
-    let key = id + changedDate.toLocaleDateString();
-    this.newProgress.set(key, {
-      id,
-      date: changedDate,
-      progress: +(<HTMLInputElement>event.target).value
-    });
+  onTempEditProgress(id: string, name: string, event: Event) {
+    this.updateMsg = [];
+    const changedDate: Date = this.date.value;
+    const progress: number = +(<HTMLInputElement>event.target).value;
+    this.newProgress.set(id, {name, date: changedDate, progress});
   }
 
   onUpdateProgress() {
-    console.log(this.newProgress);
-    this.goalService.updateProgress(this.newProgress);
+    this.isLoading = true;
+    this.goalService.updateProgress(this.newProgress).then((results) => {
+      this.isLoading = false;
+      results.forEach((res) => {
+        if (!res) {
+          this.updateMsg.push(`Update Failed on ${res.name}`);
+        } else {
+          this.updateMsg.push(`Update Successful on ${res.name}`);
+        }
+      });
+      this.newProgress =
+          new Map<string, {name: string, date: Date, progress: number}>();
+      let inputArray = document.querySelectorAll('input');
+      inputArray.forEach((input) => input.value = '');
+    })
   }
 
   directToProgress() {

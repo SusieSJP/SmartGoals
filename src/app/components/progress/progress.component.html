@@ -1,73 +1,80 @@
-<div class="center-column-bg">
+<div class="header-bg"></div>
+<div class="absolute-text"><h3>View Your Goals and <span>Overall</span> Progress</h3></div>
+<div class="fixed-bgImg">
+    <img [src]="progressUrl">
+</div>
 
 
-    <div *ngFor="let goal of (goalArr$ | async)" class="panel">
-      <mat-accordion >
-        <mat-expansion-panel>
-            <mat-expansion-panel-header class = "panel-header">
-                <mat-panel-title>
-                  <p>#{{ goal.name }}</p>
-                </mat-panel-title>
-                <mat-panel-description>
-                  <p> Overall Progress: {{ getOverallProgress(goal) }}% </p>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
+<div class="absolute-position">
+  <div class="center-column-bg">
+      <div *ngFor="let goal of goalArr" class="panel">
+        <mat-accordion>
+          <mat-expansion-panel>
+              <mat-expansion-panel-header class = "panel-header">
+                  <mat-panel-title>
+                    <p>#{{ goal.name }}</p>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    <p> Overall Progress: {{ getOverallProgress(goal) }}% </p>
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
 
-            <div class="goal-info">
-                <div class="goal-overall-info">
-                  <div>
-                      <p>Start Date: {{ goal.startDate.toLocaleDateString()}}</p>
-                      <p>Due Date: {{ goal.endDate.toLocaleDateString()}}</p>
-                      <p>Expected Daily Progress: {{ goal.avgWorkload | number:'1.1-1'}}</p>
+              <div class="goal-info">
+                  <div class="goal-overall-info">
+                    <div>
+                        <p>Start Date: {{ goal.startDate.toLocaleDateString()}}</p>
+                        <p>Due Date: {{ goal.endDate.toLocaleDateString()}}</p>
+                        <p>Expected Daily Progress: {{ goal.avgWorkload | number:'1.1-1'}}</p>
+                    </div>
+                    <div>
+                        <lib-ngx-liquid-gauge
+                          [value]="getOverallProgress(goal)"
+                          [minValue]="0"
+                          [maxValue]="100"
+                          [circleThickness]="0.2"
+                          [circleFillGap]="0.05"
+                          [circleColor]="'#3f327a'"
+                          [waveHeight]="0.1"
+                          [waveCount]="2"
+                          [waveRiseTime]="4000"
+                          [waveAnimateTime]="2000"
+                          [waveRise]="true"
+                          [waveHeightScaling]="true"
+                          [waveAnimate]="true"
+                          [waveColor]="'#cabfdf'"
+                          [waveOffset]="0"
+                          [textVertPosition]=".5"
+                          [textSize]="1"
+                          [valueCountUp]="true"
+                          [displayPercent]="true"
+                          [textColor]="'#3f327a'"
+                          [waveTextColor]="'#7063ab'">
+                        </lib-ngx-liquid-gauge>
+                    </div>
                   </div>
-                  <div>
-                      <lib-ngx-liquid-gauge
-                        [value]="getOverallProgress(goal)"
-                        [minValue]="0"
-                        [maxValue]="100"
-                        [circleThickness]="0.2"
-                        [circleFillGap]="0.05"
-                        [circleColor]="'#3f327a'"
-                        [waveHeight]="0.1"
-                        [waveCount]="2"
-                        [waveRiseTime]="4000"
-                        [waveAnimateTime]="2000"
-                        [waveRise]="true"
-                        [waveHeightScaling]="true"
-                        [waveAnimate]="true"
-                        [waveColor]="'#cabfdf'"
-                        [waveOffset]="0"
-                        [textVertPosition]=".5"
-                        [textSize]="1"
-                        [valueCountUp]="true"
-                        [displayPercent]="true"
-                        [textColor]="'#3f327a'"
-                        [waveTextColor]="'#7063ab'">
-                      </lib-ngx-liquid-gauge>
-                  </div>
-                </div>
 
-                <div class="chart-card">
-                  <div class="chart-title">
-                    <p style="margin-left: 15px">Daily Progress Distribution</p>
-                  </div>
-                  <div>
-                      <app-barchart [data] = "goal"></app-barchart>
-                  </div>
-                </div>
-
-                <div class="chart-card">
+                  <div class="chart-card">
                     <div class="chart-title">
-                      <p style="margin-left: 15px">Progress Calendar Heatmap</p>
+                      <p style="margin-left: 15px">Daily Progress Distribution</p>
                     </div>
-                    <div class="chart">
-                        <app-calendar-view [data] = "goal"></app-calendar-view>
+                    <div>
+                        <app-barchart [data] = "goal"></app-barchart>
                     </div>
-                </div>
-            </div>
+                  </div>
 
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
+                  <div class="chart-card">
+                      <div class="chart-title">
+                        <p style="margin-left: 15px">Progress Calendar Heatmap</p>
+                      </div>
+                      <div class="chart">
+                          <app-calendar-view [data] = "goal"></app-calendar-view>
+                      </div>
+                  </div>
+              </div>
 
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+  </div>
 </div>

@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -28,17 +29,18 @@ import {GoalManagementComponent} from './components/goal-management/goal-managem
 import {GroupsComponent} from './components/groups/groups.component';
 import {HomeComponent} from './components/home/home.component';
 import {ImageCropperComponent} from './components/image-cropper/image-cropper.component';
+import {LoadingSpinnerComponent} from './components/loading-spinner/loading-spinner.component';
 import {LoginComponent} from './components/login/login.component';
 import {MainpageComponent} from './components/mainpage/mainpage.component';
 import {NewGoalComponent} from './components/new-goal/new-goal.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
-import {AngularFireGoalManagementService} from './services/af-goal-management.service';
-import {AngularFireUserAccountService} from './services/af-user-account.service';
+import {UserHomeComponent} from './components/user-home/user-home.component';
 import {AuthGuardService} from './services/auth-guard.service';
-import {GoalManagementService} from './services/goal-management.service';
-import {UserAccountService} from './services/user-account.service';
+import {GoalService} from './services/goal.service';
+import {ImageService} from './services/image.service';
+import {UserService} from './services/user.service';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import {UserAccountService} from './services/user-account.service';
     BarchartComponent,
     CalendarHeatmap,
     ImageCropperComponent,
+    UserHomeComponent,
+    LoadingSpinnerComponent,
 
   ],
   imports: [
@@ -72,6 +76,7 @@ import {UserAccountService} from './services/user-account.service';
     MatCheckboxModule,
     MatToolbarModule,
     MatInputModule,
+    MatIconModule,
     FormsModule,
     MatSidenavModule,
     ReactiveFormsModule,
@@ -85,14 +90,12 @@ import {UserAccountService} from './services/user-account.service';
 
   ],
   providers: [
-    AngularFireUserAccountService,
-    AngularFireGoalManagementService,
-    {provide: UserAccountService, useClass: AngularFireUserAccountService},
-    {
-      provide: GoalManagementService,
-      useClass: AngularFireGoalManagementService
-    },
-    AuthGuardService,
+    UserService, GoalService,
+    // AngularFireGoalManagementService, {
+    //   provide: GoalManagementService,
+    //   useClass: AngularFireGoalManagementService
+    // },
+    AuthGuardService, ImageService
   ],
   bootstrap: [AppComponent]
 })

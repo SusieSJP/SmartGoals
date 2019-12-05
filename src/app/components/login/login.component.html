@@ -1,38 +1,42 @@
-<div class = "center">
+<div class="center">
 
-    <div class = "wide-margin">
+    <div class="wide-margin">
         <h1>Log In Your Account</h1>
     </div>
 
-    <div>
-        <!-- the ngSubmit directive only gives us one event we can listen to -->
-        <!-- the event made available by the ngSubmit directive will be fired whenever this form is submitted -->
-        <!-- use local reference here #f -->
-        <form class="form" (ngSubmit) = "onSubmit()" #f="ngForm" class="center-input">
+    <div class="form">
+        <form  (ngSubmit) = "onSubmit()" #f="ngForm" class="center-input">
           <mat-form-field class="full-width">
             <!-- required/email here are validators -->
-              <textarea ngModel name="email"
+              <input ngModel name="email"
                         required email
                         #email = "ngModel"
-                        matInput placeholder="Email"></textarea>
+                        matInput placeholder="Email">
           </mat-form-field>
           <p class="invalid-msg" *ngIf="!email.valid && email.touched">* Please enter a valid email address</p>
 
           <mat-form-field class="full-width">
-              <textarea ngModel name="password"
+              <!-- <input ngModel name="password"
                         required
                         #pwd = "ngModel"
-                        matInput placeholder="Password"></textarea>
+                        matInput placeholder="Password"> -->
+              <input required [type]="hide ? 'password' : 'text'"
+                        ngModel name="password"
+                        #pwd = "ngModel"
+                        matInput placeholder="Password">
+              <button mat-icon-button matSuffix (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
           </mat-form-field>
           <p class="invalid-msg" *ngIf="!pwd.valid && pwd.touched">* This is a required field</p>
-          <!-- if we put the button inside the form element, this button will submit the form,
-            will send a request normally, besides that, it will also trigger a javascript event-->
           <p *ngIf="loginStatus === false" class="invalid-msg">Sorry, Invalid email address or password, please try again :(</p>
           <button class = "wide-margin" mat-raised-button color="primary"
                   [disabled]="!f.valid">Log In</button>
         </form>
+        <p *ngIf="errorMsg" class="invalid-msg">{{ errorMsg }}</p>
         <button class="wide-margin full-button" mat-flat-button
-                (click)="userAccountService.loginWithGoogle()">
+                (click)="userService.loginWithGoogle()">
                 Log In with Google
               </button>
       </div>

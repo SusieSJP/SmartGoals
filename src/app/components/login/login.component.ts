@@ -1,35 +1,28 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {skip, take} from 'rxjs/operators';
-import {UserAccountService} from 'src/app/services/user-account.service';
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @ViewChild('f', {static: true}) loginForm: NgForm;
   loginStatus = true;
+  hide = true;
+  errorMsg = '';
 
-  constructor(
-      private router: Router, public userAccountService: UserAccountService) {}
+  constructor(public userService: UserService) {}
 
-  ngOnInit() {
-    this.userAccountService.activeUser.pipe(skip(1), take(1))
-        .subscribe((user) => {
-          if (user != null) {
-            this.router.navigate(['/mainpage', user.userName]);
-          } else {
-            this.loginForm.reset();
-            this.loginStatus = false;
-          }
-        });
-  }
-
-  onSubmit() {
-    this.userAccountService.loginWithEmail(
+  async onSubmit() {
+    await this.userService.loginWithEmail(
         this.loginForm.value.email, this.loginForm.value.password);
+    if (this.userService.errorMessage) {
+      this.errorMsg = this.userService.errorMessage;
+      this.userService.errorMessage = '';
+    } else {
+      this.errorMsg = '';
+    }
   }
 }

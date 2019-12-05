@@ -10,21 +10,23 @@ import {NewGoalComponent} from './components/new-goal/new-goal.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ProgressComponent} from './components/progress/progress.component';
 import {SignupComponent} from './components/signup/signup.component';
+import {UserHomeComponent} from './components/user-home/user-home.component';
 import {AuthGuardService} from './services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent}, {
-    path: 'mainpage/:username',
+    path: 'mainpage/:userName',
     canActivate: [AuthGuardService],
     component: MainpageComponent,
     children: [
+      {path: '', component: UserHomeComponent},
       {path: 'new-goal', component: NewGoalComponent},
-      {path: 'personal-progress', component: ProgressComponent},
+      {path: 'personal-progress', component: GoalManagementComponent},
       {path: 'groups', component: GroupsComponent},
       {path: 'profile', component: ProfileComponent},
-      {path: 'goal-management', component: GoalManagementComponent}
+      {path: 'goal-management', component: ProgressComponent}
     ]
   },
   {path: '**', redirectTo: ''}

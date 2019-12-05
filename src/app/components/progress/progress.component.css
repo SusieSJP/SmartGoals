@@ -57,3 +57,52 @@ span {
 .chart {
   height: 180px;
 }
+
+
+.absolute-position {
+  position: absolute;
+  background:white;
+  padding-bottom: 4%;
+  width: 50%;
+  top:150px;
+  left:8%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.absolute-text {
+  position: absolute;
+  width: 50%;
+  top:50px;
+  left:8%;
+  text-align: center;
+}
+
+.fixed-bgImg {
+  position: fixed;
+  bottom:0px;
+  right: 2%;
+}
+
+img {
+  width: 700px;
+}
+
+h3 {
+  font-family: 'Lalezar', cursive;
+  font-size: 3em;
+  color:black;
+  margin-block-start: 0px;
+}
+
+span {
+  color: #3e0c7a;
+}
+
+.header-bg {
+  display: flex;
+  height: 250px;
+  background-color:#cabfdf;
+  color: #3f327a;
+  align-items: center;
+}
+
